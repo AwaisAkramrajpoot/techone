@@ -39,16 +39,15 @@ export default function LoginPage() {
 
       {/* Right Side - Form */}
       <div className="flex flex-1 items-center justify-center bg-white px-4 py-10 sm:px-6">
-        <div className="w-full max-w-sm">
-          {/* Title */}
+      <div className="w-full max-w-md border border-gray-100 rounded-2xl shadow-lg bg-white p-6">         
           <h1
-            className="text-center font-bold text-xl mb-6 tracking-widest"
+            className="text-center font-bold text-[25px]  py-4 tracking-widest"
             style={{ color: '#1a1a2e', letterSpacing: '0.08em' }}
           >
             WELCOME TO HR SYSTEM
           </h1>
 
-          <form onSubmit={handleSignUp} className="space-y-4">
+          <form onSubmit={handleSignUp} className="space-y-4 mt-4">
             {/* Google Sign Up Button */}
             <button
               type="button"
@@ -75,16 +74,12 @@ export default function LoginPage() {
               </svg>
               Sign Up with Google
             </button>
-
-            {/* Divider */}
-            <div className="relative my-2">
-              <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-gray-200" />
-              </div>
-              <div className="relative flex justify-center text-xs">
+ 
+           
+              <div className=" flex justify-center text-xs py-2">
                 <span className="bg-white px-3 text-gray-400">OR</span>
               </div>
-            </div>
+         
 
             {/* User Name Input */}
             <div className="relative">
@@ -101,7 +96,7 @@ export default function LoginPage() {
                 placeholder="User Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
                 required
               />
             </div>
@@ -121,7 +116,7 @@ export default function LoginPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
                 required
               />
             </div>
@@ -141,7 +136,7 @@ export default function LoginPage() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition"
+                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
                 required
               />
             </div>
@@ -152,7 +147,7 @@ export default function LoginPage() {
                 id="remember"
                 checked={rememberMe}
                 onCheckedChange={(checked) => setRememberMe(checked as boolean)}
-                className="border-blue-600 data-[state=checked]:bg-blue-600"
+                className="border-[#04499E] data-[state=checked]:bg-[#04499E]"
               />
               <Label
                 htmlFor="remember"
@@ -166,12 +161,12 @@ export default function LoginPage() {
             <button
               type="submit"
               className="w-full py-2.5 rounded-md text-white text-sm font-semibold transition-colors"
-              style={{ backgroundColor: '#1565C0' }}
+              style={{ backgroundColor: '#04499E' }}
               onMouseEnter={(e) =>
-                ((e.target as HTMLButtonElement).style.backgroundColor = '#0d47a1')
+                ((e.target as HTMLButtonElement).style.backgroundColor = '#04499E')
               }
               onMouseLeave={(e) =>
-                ((e.target as HTMLButtonElement).style.backgroundColor = '#1565C0')
+                ((e.target as HTMLButtonElement).style.backgroundColor = '#04499E')
               }
             >
               Sign Up
@@ -182,7 +177,7 @@ export default function LoginPage() {
               <button
                 type="button"
                 onClick={() => router.push('/login')}
-                className="text-blue-600 font-medium hover:underline"
+                className="text-[#04499E] font-medium hover:underline"
               >
                 Sign in
               </button>
@@ -192,11 +187,11 @@ export default function LoginPage() {
           {/* Footer */}
           <p className="mt-5 text-center text-xs text-gray-500">
             By continuing, you agree to the JobFind{' '}
-            <a href="#" className="text-blue-600 underline">
+            <a href="#" className="text-[#04499E] underline">
               Terms of Service
             </a>{' '}
             and the{' '}
-            <a href="#" className="text-blue-600 underline">
+            <a href="#" className="text-[#04499E] underline">
               Privacy Policy
             </a>
           </p>

@@ -1,18 +1,18 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Image from 'next/image';
+import { useState } from "react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function LoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [rememberMe, setRememberMe] = useState(false);
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault();
-    router.push('/dashboard');
+    router.push("/dashboard");
   };
 
   return (
@@ -31,14 +31,12 @@ export default function LoginPage() {
 
       {/* RIGHT SIDE */}
       <div className="order-1 flex flex-1 items-center justify-center bg-[#F8F8F8] px-4 py-10 sm:px-6 lg:order-2">
-        <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl sm:p-8">
-          
-          <h1 className="text-center font-semibold text-lg tracking-widest mb-6 text-gray-800">
+        <div className="w-full max-w-md border border-gray-100 rounded-2xl shadow-lg bg-white p-8 ">
+          <h1 className="text-center font-semibold text-[25px] tracking-widest  md:py-6 text-gray-800">
             WELCOME TO HR SYSTEM
           </h1>
 
           <form onSubmit={handleLogin} className="space-y-4">
-            
             {/* Email Input */}
             <div className="relative">
               <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
@@ -55,7 +53,7 @@ export default function LoginPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#04499E]"
                 required
               />
             </div>
@@ -76,7 +74,7 @@ export default function LoginPage() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-[#04499E]"
                 required
               />
             </div>
@@ -88,15 +86,12 @@ export default function LoginPage() {
                   type="checkbox"
                   checked={rememberMe}
                   onChange={() => setRememberMe(!rememberMe)}
-                  className="accent-blue-600"
+                  className="accent-[#04499E]"
                 />
                 Remember me
               </label>
 
-              <button
-                type="button"
-                className="text-blue-600 hover:underline"
-              >
+              <button type="button" className="text-[#04499E] hover:underline">
                 Forgot Password?
               </button>
             </div>
@@ -104,7 +99,7 @@ export default function LoginPage() {
             {/* Login Button */}
             <button
               type="submit"
-              className="w-full py-2.5 rounded-lg bg-blue-700 hover:bg-blue-800 text-white text-sm font-medium transition"
+              className="w-full py-3 rounded-lg bg-[#04499E] hover:bg-blue-800 text-white text-sm font-medium transition"
             >
               Login
             </button>
@@ -112,12 +107,12 @@ export default function LoginPage() {
 
           {/* Footer */}
           <p className="mt-6 text-center text-xs text-gray-500">
-            By continuing, you agree to the JobFind{' '}
-            <span className="text-blue-600 underline cursor-pointer">
+            By continuing, you agree to the JobFind{" "}
+            <span className="text-[#04499E] underline cursor-pointer">
               Terms of Service
-            </span>{' '}
-            and the{' '}
-            <span className="text-blue-600 underline cursor-pointer">
+            </span>{" "}
+            and the{" "}
+            <span className="text-[#04499E] underline cursor-pointer">
               Privacy Policy
             </span>
           </p>

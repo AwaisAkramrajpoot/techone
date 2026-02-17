@@ -183,7 +183,7 @@ export default function OrdersPage() {
   ];
 
   return (
-    <div className="flex min-h-screen bg-slate-100">
+    <div className="flex  bg-slate-100">
       <Sidebar mobileOpen={mobileSidebarOpen} setMobileOpen={setMobileSidebarOpen} />
 
       <div className="flex flex-1 flex-col lg:ml-60 transition-all duration-300">

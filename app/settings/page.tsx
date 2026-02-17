@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
+import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -62,11 +63,13 @@ export default function SettingsPage() {
   });
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-slate-100">
       <Sidebar />
 
-      <main className="flex-1 lg:ml-64 transition-all duration-300">
-        <div className="p-6 lg:p-8">
+      <div className="flex flex-1 flex-col lg:ml-60 transition-all duration-300">
+        <Header />
+
+        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
           <div className="mb-8">
             <h1 className="text-3xl font-bold text-slate-900">Settings</h1>
             <p className="text-slate-600 mt-2">
@@ -362,11 +365,11 @@ export default function SettingsPage() {
                 <Button variant="outline" className="w-full">
                   Manage Storage
                 </Button>
-              </CardContent>
+            </CardContent>
             </Card>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
 
       <Dialog open={changePasswordOpen} onOpenChange={setChangePasswordOpen}>
         <DialogContent>

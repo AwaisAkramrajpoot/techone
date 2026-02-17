@@ -1,104 +1,68 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { cn } from '@/lib/utils';
-import {
-  LayoutDashboard,
-  Users,
-  ClipboardList,
-  Building2,
-  CreditCard,
-  Settings,
-  Menu,
-  X,
-  ChevronLeft,
-} from 'lucide-react';
-import { useState } from 'react';
-import { Button } from '@/components/ui/button';
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import { cn } from "@/lib/utils";
+import { Menu, X, ChevronLeft } from "lucide-react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
 
 const menuItems = [
   {
-    title: 'Dashboard',
-    href: '/dashboard',
-    icon: LayoutDashboard,
+    title: "Dashboard",
+    href: "/dashboard",
+    icon: "/svgs/dashboard.svg",
   },
   {
-    title: 'Employees',
-    href: '/users',
-    icon: Users,
+    title: "Companies",
+    href: "/users",
+    icon: "/svgs/company.svg",
   },
   {
-    title: 'Attendance',
-    href: '/orders',
-    icon: ClipboardList,
+    title: "Branch",
+    href: "/powerstation",
+    icon: "/svgs/branch.svg",
   },
   {
-    title: 'Departments',
-    href: '/powerstation',
-    icon: Building2,
-  },
-  {
-    title: 'Payroll',
-    href: '/payments',
-    icon: CreditCard,
-  },
-  {
-    title: 'Settings',
-    href: '/settings',
-    icon: Settings,
+    title: "HR",
+    href: "/orders",
+    icon: "/svgs/HR.svg",
   },
 ];
 
 export function Sidebar() {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false);
-  const [isCollapsed, setIsCollapsed] = useState(false);
+  const [isOpen, setIsOpen] = useState(false); 
 
   return (
     <>
-      <Button
-        variant="ghost"
-        size="icon"
-        className="fixed top-4 left-4 z-50 lg:hidden"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-      </Button>
-
       <aside
         className={cn(
-          'fixed left-0 top-0 z-40 h-screen bg-white border-r transition-all duration-300',
-          isCollapsed ? 'w-20' : 'w-64',
-          isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
+          "fixed left-0 top-0 z-40 h-screen border-r border-[#E2E5EA] bg-[#FAFAFA] transition-all duration-300",
+          "w-60",
+          isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}
       >
         <div className="flex h-full flex-col">
-          <div className="flex h-16 items-center justify-between px-6 border-b">
-            {!isCollapsed && (
-              <Link href="/dashboard" className="flex items-center space-x-2">
-                <Building2 className="h-6 w-6 text-primary" />
-                <span className="text-xl font-bold">ERP System</span>
-              </Link>
-            )}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="hidden lg:flex"
-              onClick={() => setIsCollapsed(!isCollapsed)}
-            >
-              <ChevronLeft
-                className={cn(
-                  'h-4 w-4 transition-transform',
-                  isCollapsed && 'rotate-180'
-                )}
+          <div className="flex h-20 items-center justify-between border-b border-gray-200 bg-[#FAFAFA] px-4">
+            <Link href="/dashboard" className="flex items-center">
+              <Image
+                src="/images/logocompany.png"
+                alt="Company Logo"
+                width={130}
+                height={36}
+                className="flex items-center justify-center ml-7"
+                priority
               />
-            </Button>
-          </div>
-
-          <nav className="flex-1 space-y-1 px-3 py-4 overflow-y-auto">
+            </Link>
+          </div> 
+            <div className="text-[15px]  px-3 mt-7 font-semibold uppercase text-[#5B5F62]">
+              Admin
+            </div>
+        
+          <nav className="flex-1 space-y-1 overflow-y-auto px-2 py-4">
             {menuItems.map((item) => {
-              const Icon = item.icon;
               const isActive = pathname === item.href;
 
               return (
@@ -107,33 +71,27 @@ export function Sidebar() {
                   href={item.href}
                   onClick={() => setIsOpen(false)}
                   className={cn(
-                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all hover:bg-accent',
+                    "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all",
                     isActive
-                      ? 'bg-primary text-primary-foreground hover:bg-primary/90'
-                      : 'text-muted-foreground hover:text-foreground',
-                    isCollapsed && 'justify-center'
+                      ? "bg-[#04499E] text-white shadow-sm hover:bg-[#04499E]"
+                      : "text-black hover:bg-[#E9EEF5] hover:text-black"
                   )}
                 >
-                  <Icon className="h-5 w-5 shrink-0" />
-                  {!isCollapsed && <span>{item.title}</span>}
+                  <Image
+                    src={item.icon}
+                    alt={item.title}
+                    width={16}
+                    height={16}
+                    className={cn(
+                      "h-4 w-4 shrink-0",
+                      isActive && "brightness-0 invert"
+                    )}
+                  />
+                  <span>{item.title}</span>
                 </Link>
               );
             })}
           </nav>
-
-          <div className="border-t p-4">
-            <div className={cn('flex items-center gap-3', isCollapsed && 'justify-center')}>
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-primary/60 flex items-center justify-center text-primary-foreground font-semibold">
-                JD
-              </div>
-              {!isCollapsed && (
-                <div className="flex-1 min-w-0">
-                  <p className="text-sm font-medium truncate">John Doe</p>
-                  <p className="text-xs text-muted-foreground truncate">Admin</p>
-                </div>
-              )}
-            </div>
-          </div>
         </div>
       </aside>
 

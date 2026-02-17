@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Sidebar } from '@/components/layout/Sidebar';
+import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -39,11 +40,13 @@ export default function NewDepartmentPage() {
   };
 
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-slate-100">
       <Sidebar />
 
-      <main className="flex-1 lg:ml-64 transition-all duration-300">
-        <div className="p-6 lg:p-8">
+      <div className="flex flex-1 flex-col lg:ml-60 transition-all duration-300">
+        <Header />
+
+        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
           <Button
             variant="ghost"
             onClick={() => router.push('/powerstation')}
@@ -146,11 +149,11 @@ export default function NewDepartmentPage() {
                     </Button>
                   </div>
                 </form>
-              </CardContent>
+            </CardContent>
             </Card>
           </div>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }

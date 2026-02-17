@@ -1,254 +1,161 @@
 'use client';
 
 import { Sidebar } from '@/components/layout/Sidebar';
+import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/components/ui/card';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/components/ui/table';
-import { Badge } from '@/components/ui/badge';
-import {
-  Users,
-  ClipboardCheck,
-  DollarSign,
-  FileText,
-  TrendingUp,
-  UserPlus,
-  FileBarChart,
-  Calendar,
-} from 'lucide-react';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { Calendar, ClipboardCheck, DollarSign, FileBarChart, FileText, Users } from 'lucide-react';
 
-const stats = [
+const overviewCards = [
   {
     title: 'Total Employees',
-    value: '1,234',
-    change: '+12%',
+    value: '5',
+    subtitle: 'Currently hired',
     icon: Users,
-    color: 'bg-blue-500',
-    trend: 'up',
   },
   {
-    title: 'Total Attendance',
-    value: '98.5%',
-    change: '+2.1%',
+    title: 'Present Today',
+    value: '0',
+    subtitle: 'Out of 5',
     icon: ClipboardCheck,
-    color: 'bg-green-500',
-    trend: 'up',
   },
   {
-    title: 'Total Payroll',
-    value: '$842,430',
-    change: '+8%',
-    icon: DollarSign,
-    color: 'bg-amber-500',
-    trend: 'up',
-  },
-  {
-    title: 'Pending Leaves',
-    value: '24',
-    change: '-5%',
+    title: 'On Leave',
+    value: '1',
+    subtitle: 'Currently away',
     icon: FileText,
-    color: 'bg-red-500',
-    trend: 'down',
-  },
-];
-
-const recentActivities = [
-  {
-    id: 1,
-    employee: 'John Smith',
-    action: 'Applied for leave',
-    department: 'Engineering',
-    time: '2 hours ago',
-    status: 'pending',
   },
   {
-    id: 2,
-    employee: 'Sarah Johnson',
-    action: 'Checked in',
-    department: 'Marketing',
-    time: '3 hours ago',
-    status: 'approved',
+    title: 'Overtime Hours',
+    value: '0',
+    subtitle: "Today's total",
+    icon: DollarSign,
   },
   {
-    id: 3,
-    employee: 'Michael Brown',
-    action: 'Submitted timesheet',
-    department: 'Sales',
-    time: '5 hours ago',
-    status: 'approved',
+    title: 'Upcoming Holidays',
+    value: '0',
+    subtitle: 'This year',
+    icon: Calendar,
   },
   {
-    id: 4,
-    employee: 'Emily Davis',
-    action: 'Requested overtime',
-    department: 'HR',
-    time: '1 day ago',
-    status: 'pending',
-  },
-  {
-    id: 5,
-    employee: 'David Wilson',
-    action: 'Updated profile',
-    department: 'Finance',
-    time: '2 days ago',
-    status: 'completed',
+    title: 'Pending applications',
+    value: '1',
+    subtitle: 'Awaiting approval',
+    icon: FileBarChart,
   },
 ];
 
 export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen bg-slate-50">
+    <div className="flex min-h-screen bg-slate-100">
       <Sidebar />
 
-      <main className="flex-1 lg:ml-64 transition-all duration-300">
-        <div className="p-6 lg:p-8">
+      <div className="flex flex-1 flex-col lg:ml-60 transition-all duration-300">
+        <Header />
+
+        <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
           <div className="mb-8">
-            <h1 className="text-3xl font-bold text-slate-900">Dashboard</h1>
-            <p className="text-slate-600 mt-2">
-              Welcome back! Here's what's happening with your organization today.
+            <h1 className="text-2xl font-semibold text-slate-900 sm:text-3xl">
+              Employee Dashboard
+            </h1>
+            <p className="mt-1 text-sm text-slate-500 sm:text-base">
+              Welcome back! Here&apos;s what&apos;s happening at your workplace today.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4 mb-8">
-            {stats.map((stat) => {
-              const Icon = stat.icon;
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {overviewCards.map((card) => {
+              const Icon = card.icon;
               return (
-                <Card key={stat.title} className="hover:shadow-lg transition-shadow">
-                  <CardContent className="p-6">
-                    <div className="flex items-center justify-between mb-4">
-                      <div
-                        className={`${stat.color} p-3 rounded-xl text-white shadow-md`}
-                      >
-                        <Icon className="h-6 w-6" />
+                <Card
+                  key={card.title}
+                  className="relative overflow-hidden border-0 bg-white shadow-sm"
+                >
+                  <CardContent className="p-5 sm:p-6">
+                    <div className="flex items-start justify-between">
+                      <div>
+                        <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                          {card.title}
+                        </p>
+                        <p className="mt-3 text-3xl font-semibold text-slate-900">
+                          {card.value}
+                        </p>
+                        <p className="mt-1 text-xs text-slate-500">
+                          {card.subtitle}
+                        </p>
                       </div>
-                      <div
-                        className={`flex items-center text-sm font-medium ${
-                          stat.trend === 'up'
-                            ? 'text-green-600'
-                            : 'text-red-600'
-                        }`}
-                      >
-                        <TrendingUp
-                          className={`h-4 w-4 mr-1 ${
-                            stat.trend === 'down' && 'rotate-180'
-                          }`}
-                        />
-                        {stat.change}
+                      <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0F5FFF]/10 text-[#0F5FFF]">
+                        <Icon className="h-5 w-5" />
                       </div>
                     </div>
-                    <h3 className="text-2xl font-bold text-slate-900 mb-1">
-                      {stat.value}
-                    </h3>
-                    <p className="text-sm text-slate-600">{stat.title}</p>
                   </CardContent>
                 </Card>
               );
             })}
           </div>
 
-          <div className="grid gap-6 lg:grid-cols-3 mb-8">
-            <Button
-              size="lg"
-              className="h-auto py-6 flex flex-col items-center gap-2 hover:scale-105 transition-transform"
-            >
-              <UserPlus className="h-8 w-8" />
-              <span className="text-lg font-semibold">Add Employee</span>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-auto py-6 flex flex-col items-center gap-2 hover:scale-105 transition-transform"
-            >
-              <DollarSign className="h-8 w-8" />
-              <span className="text-lg font-semibold">Generate Payroll</span>
-            </Button>
-            <Button
-              size="lg"
-              variant="outline"
-              className="h-auto py-6 flex flex-col items-center gap-2 hover:scale-105 transition-transform"
-            >
-              <FileBarChart className="h-8 w-8" />
-              <span className="text-lg font-semibold">View Reports</span>
-            </Button>
-          </div>
-
-          <Card className="shadow-lg">
-            <CardHeader>
+          <Card className="mt-8 border-0 bg-white shadow-sm">
+            <CardHeader className="pb-3 sm:pb-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <CardTitle className="text-2xl">Recent Activities</CardTitle>
-                  <CardDescription className="mt-1">
-                    Latest updates from your organization
-                  </CardDescription>
+                  <CardTitle className="text-base font-semibold text-slate-900 sm:text-lg">
+                    March 2021
+                  </CardTitle>
+                  <p className="mt-1 text-xs text-slate-500 sm:text-sm">
+                    Company calendar
+                  </p>
                 </div>
-                <Button variant="outline" size="sm">
-                  <Calendar className="h-4 w-4 mr-2" />
-                  View All
+                <Button variant="outline" size="sm" className="text-xs sm:text-sm">
+                  <Calendar className="mr-1.5 h-3.5 w-3.5 sm:mr-2 sm:h-4 sm:w-4" />
+                  Today
                 </Button>
               </div>
             </CardHeader>
             <CardContent>
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>Employee</TableHead>
-                    <TableHead>Action</TableHead>
-                    <TableHead>Department</TableHead>
-                    <TableHead>Time</TableHead>
-                    <TableHead>Status</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {recentActivities.map((activity) => (
-                    <TableRow key={activity.id}>
-                      <TableCell className="font-medium">
-                        {activity.employee}
-                      </TableCell>
-                      <TableCell>{activity.action}</TableCell>
-                      <TableCell>{activity.department}</TableCell>
-                      <TableCell className="text-slate-500">
-                        {activity.time}
-                      </TableCell>
-                      <TableCell>
-                        <Badge
-                          variant={
-                            activity.status === 'approved'
-                              ? 'default'
-                              : activity.status === 'pending'
-                              ? 'secondary'
-                              : 'outline'
-                          }
-                          className={
-                            activity.status === 'approved'
-                              ? 'bg-green-500 hover:bg-green-600'
-                              : activity.status === 'pending'
-                              ? 'bg-amber-500 hover:bg-amber-600 text-white'
-                              : ''
-                          }
-                        >
-                          {activity.status}
-                        </Badge>
-                      </TableCell>
-                    </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+              <div className="overflow-x-auto">
+                <div className="min-w-[560px]">
+                  <div className="grid grid-cols-7 text-center text-[11px] font-medium uppercase tracking-wide text-slate-500">
+                    <span>Sun</span>
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                  </div>
+                  <div className="mt-3 grid grid-cols-7 gap-1 text-center text-xs text-slate-700">
+                    {[27, 28].map((day) => (
+                      <div
+                        key={`prev-${day}`}
+                        className="flex h-10 items-center justify-center rounded-md text-slate-300"
+                      >
+                        {day}
+                      </div>
+                    ))}
+                    {Array.from({ length: 31 }, (_, i) => i + 1).map((day) => (
+                      <div
+                        key={day}
+                        className="flex h-10 items-center justify-center rounded-md border border-transparent text-slate-700 hover:border-[#0F5FFF]/40 hover:bg-[#0F5FFF]/5"
+                      >
+                        {day}
+                      </div>
+                    ))}
+                    {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((day) => (
+                      <div
+                        key={`next-${day}`}
+                        className="flex h-10 items-center justify-center rounded-md text-slate-300"
+                      >
+                        {day}
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </div>
             </CardContent>
           </Card>
-        </div>
-      </main>
+        </main>
+      </div>
     </div>
   );
 }
+

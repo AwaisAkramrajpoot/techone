@@ -31,9 +31,17 @@ const menuItems = [
   },
 ];
 
-export function Sidebar() {
+type SidebarProps = {
+  mobileOpen?: boolean;
+  setMobileOpen?: (open: boolean) => void;
+};
+
+export function Sidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
   const pathname = usePathname();
-  const [isOpen, setIsOpen] = useState(false); 
+  const [internalOpen, setInternalOpen] = useState(false);
+
+  const isOpen = mobileOpen ?? internalOpen;
+  const setIsOpen = setMobileOpen ?? setInternalOpen;
 
   return (
     <>

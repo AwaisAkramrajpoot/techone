@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { Sidebar } from '@/components/layout/Sidebar';
 import { Header } from '@/components/layout/Header';
 import { Button } from '@/components/ui/button';
@@ -113,6 +114,8 @@ const payrollData = [
 ];
 
 export default function PaymentsPage() {
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
+
   const totalPayroll = payrollData.reduce((sum, item) => {
     const netSalary = parseFloat(item.netSalary.replace(/[$,]/g, ''));
     return sum + netSalary;
@@ -125,10 +128,10 @@ export default function PaymentsPage() {
 
   return (
     <div className="flex min-h-screen bg-slate-100">
-      <Sidebar />
+      <Sidebar mobileOpen={mobileSidebarOpen} setMobileOpen={setMobileSidebarOpen} />
 
       <div className="flex flex-1 flex-col lg:ml-60 transition-all duration-300">
-        <Header />
+        <Header onToggleSidebar={() => setMobileSidebarOpen((open) => !open)} />
 
         <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
           <div className="mb-8">

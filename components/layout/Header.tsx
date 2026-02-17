@@ -1,11 +1,37 @@
 'use client';
 
-import { Search, Bell } from 'lucide-react';
+import { Search, Bell, Menu } from 'lucide-react';
 
-export function Header() {
+type HeaderProps = {
+  onToggleSidebar?: () => void;
+};
+
+export function Header({ onToggleSidebar }: HeaderProps) {
   return (
     <header className="sticky top-0 z-30 flex h-20 items-center justify-between border-b bg-white px-4 shadow-sm sm:px-6 lg:px-8">
-    
+      <div className="flex items-center gap-3">
+        {onToggleSidebar && (
+          <button
+            type="button"
+            onClick={onToggleSidebar}
+            className="inline-flex h-9 w-9 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:bg-slate-50 lg:hidden"
+          >
+            <Menu className="h-4 w-4" />
+          </button>
+        )}
+
+        <div className="hidden items-center gap-2 sm:flex">
+          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-[#0F5FFF] text-xs font-semibold tracking-tight text-white shadow-sm">
+            XC
+          </div>
+          <div className="leading-tight">
+            <p className="text-[11px] font-semibold uppercase tracking-wide text-slate-500">
+              Xtreme
+            </p>
+            <p className="text-sm font-semibold text-slate-900">Computer</p>
+          </div>
+        </div>
+      </div>
 
       <div className="hidden flex-1 px-4 md:flex lg:px-0">
         <div className="relative w-full max-w-md">

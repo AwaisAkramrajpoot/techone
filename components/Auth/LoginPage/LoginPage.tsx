@@ -16,10 +16,9 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
-      
+    <div className="flex min-h-screen flex-col bg-[#F8F8F8] md:flex-row">
       {/* LEFT SIDE */}
-      <div className="hidden lg:flex w-1/2 bg-[#F3F3F3] items-center justify-center">
+      <div className="order-2 hidden w-1/2 items-center justify-center bg-[#F3F3F3] lg:order-1 lg:flex">
         <Image
           src="/images/signup.png"
           alt="Dashboard Illustration"
@@ -31,9 +30,8 @@ export default function LoginPage() {
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="flex-1 flex items-center justify-center bg-[#F8F8F8]">
-        
-        <div className="w-full max-w-md bg-white rounded-2xl shadow-xl p-8">
+      <div className="order-1 flex flex-1 items-center justify-center bg-[#F8F8F8] px-4 py-10 sm:px-6 lg:order-2">
+        <div className="w-full max-w-md rounded-2xl bg-white p-6 shadow-xl sm:p-8">
           
           <h1 className="text-center font-semibold text-lg tracking-widest mb-6 text-gray-800">
             WELCOME TO HR SYSTEM

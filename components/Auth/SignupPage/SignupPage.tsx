@@ -19,7 +19,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex">
+    <div className="flex min-h-screen flex-col bg-white md:flex-row">
       {/* Left Side - Illustration */}
       <div
         className="hidden lg:flex w-1/2 items-center justify-center"
@@ -38,7 +38,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex-1 flex items-center justify-center bg-white p-6">
+      <div className="flex flex-1 items-center justify-center bg-white px-4 py-10 sm:px-6">
         <div className="w-full max-w-sm">
           {/* Title */}
           <h1

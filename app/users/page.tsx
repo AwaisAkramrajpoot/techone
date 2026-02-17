@@ -126,6 +126,7 @@ const employees = [
 export default function UsersPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [filterRole, setFilterRole] = useState('all');
+  const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
   const filteredEmployees = employees.filter((employee) => {
     const matchesSearch =
@@ -159,10 +160,10 @@ export default function UsersPage() {
 
   return (
     <div className="flex min-h-screen bg-slate-100">
-      <Sidebar />
+      <Sidebar mobileOpen={mobileSidebarOpen} setMobileOpen={setMobileSidebarOpen} />
 
       <div className="flex flex-1 flex-col lg:ml-60 transition-all duration-300">
-        <Header />
+        <Header onToggleSidebar={() => setMobileSidebarOpen((open) => !open)} />
 
         <main className="flex-1 px-4 py-6 sm:px-6 lg:px-8">
           <div className="mb-8">

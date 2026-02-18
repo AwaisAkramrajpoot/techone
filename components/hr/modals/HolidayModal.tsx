@@ -4,41 +4,42 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
-export type DesignationFormValues = {
-  company: string;
-  branch: string;
-  department: string;
-  designationName: string;
+export type HolidayFormValues = {
+  holidayName: string;
+  holidayCode: string;
+  startDate: string;
+  endDate: string;
+  daysCount: string;
   isActive: boolean;
 };
 
-type DesignationModalProps = {
+type HolidayModalProps = {
   isOpen: boolean;
-  values: DesignationFormValues;
-  onFieldChange: <K extends keyof DesignationFormValues>(
+  values: HolidayFormValues;
+  onFieldChange: <K extends keyof HolidayFormValues>(
     field: K,
-    value: DesignationFormValues[K]
+    value: HolidayFormValues[K]
   ) => void;
   onClose: () => void;
   onSave: () => void;
+  onClear: () => void;
 };
 
-export function DesignationModal({
+export function HolidayModal({
   isOpen,
   values,
   onFieldChange,
   onClose,
   onSave,
-}: DesignationModalProps) {
+  onClear,
+}: HolidayModalProps) {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4">
       <div className="w-full max-w-4xl rounded-md bg-white p-4 shadow-lg sm:p-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold text-[#1F2937]">
-            Add New Designation
-          </h2>
+          <h2 className="text-2xl font-semibold text-[#1F2937]">Add New Holidays</h2>
           <button type="button" onClick={onClose} className="text-[#111827]">
             <X className="h-5 w-5" />
           </button>
@@ -47,59 +48,60 @@ export function DesignationModal({
         <div className="space-y-4">
           <div>
             <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Company
-            </label>
-            <select
-              value={values.company}
-              onChange={(e) => onFieldChange("company", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
-            >
-              <option value="">Select company</option>
-              <option value="Tech Solutions Pvt Ltd">Tech Solutions Pvt Ltd</option>
-              <option value="Global Enterprises">Global Enterprises</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Branch
-            </label>
-            <select
-              value={values.branch}
-              onChange={(e) => onFieldChange("branch", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
-            >
-              <option value="">Select branch</option>
-              <option value="Tech Solutions - Main">Tech Solutions - Main</option>
-              <option value="Tech Solutions - East">Tech Solutions - East</option>
-              <option value="Global Enterprise">Global Enterprise</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Department Name
-            </label>
-            <select
-              value={values.department}
-              onChange={(e) => onFieldChange("department", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
-            >
-              <option value="">Select Department</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Operations">Operations</option>
-              <option value="Finance">Finance</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Designation Name
+              Holiday Name
             </label>
             <Input
-              value={values.designationName}
-              onChange={(e) => onFieldChange("designationName", e.target.value)}
-              placeholder="Enter designation name"
+              value={values.holidayName}
+              onChange={(e) => onFieldChange("holidayName", e.target.value)}
+              placeholder="Enter holiday name"
+              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">
+              Holiday Abbreviation
+            </label>
+            <Input
+              value={values.holidayCode}
+              onChange={(e) => onFieldChange("holidayCode", e.target.value)}
+              placeholder="Enter holiday ID"
+              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">
+              Start Date
+            </label>
+            <Input
+              type="date"
+              value={values.startDate}
+              onChange={(e) => onFieldChange("startDate", e.target.value)}
+              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">
+              End Date
+            </label>
+            <Input
+              type="date"
+              value={values.endDate}
+              onChange={(e) => onFieldChange("endDate", e.target.value)}
+              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">
+              Number of Days Count
+            </label>
+            <Input
+              value={values.daysCount}
+              onChange={(e) => onFieldChange("daysCount", e.target.value)}
+              placeholder="Enter number of employees"
               className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
             />
           </div>
@@ -132,14 +134,14 @@ export function DesignationModal({
             onClick={onSave}
             className="h-11 bg-[#04499E] text-white hover:bg-[#033E87]"
           >
-            Save
+            Save Holidays
           </Button>
           <Button
             variant="outline"
-            onClick={onClose}
+            onClick={onClear}
             className="h-11 border-[#8AAEDA] bg-[#8AAEDA] text-white hover:bg-[#7A9ECB]"
           >
-            Close
+            Clear
           </Button>
         </div>
       </div>

@@ -11,6 +11,7 @@ import { EmployeeInfoView } from "@/components/hr/EmployeeInfoView";
 import { AllowanceDeductionView } from "@/components/hr/AllowanceDeductionView";
 import { AdvancedView } from "@/components/hr/AdvancedView";
 import { LoanView } from "@/components/hr/LoanView";
+import { ExpensesView } from "@/components/hr/ExpensesView";
 import { getHrTabBySlug } from "@/components/hr/hr-tabs";
 
 type HrTabPageProps = {
@@ -67,6 +68,10 @@ export default async function HrTabPage({ params }: HrTabPageProps) {
 
   if (activeTab.slug === "loan") {
     return <LoanView />;
+  }
+
+  if (activeTab.slug === "expenses") {
+    return <ExpensesView />;
   }
 
   return <HrContentView title={activeTab.title} label={activeTab.label} />;

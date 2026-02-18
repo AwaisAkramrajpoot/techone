@@ -12,7 +12,7 @@ export const siteConfig = {
     },
     {
       title: "Attendance",
-      href: "/orders",
+      href: "/hr/department",
     },
     {
       title: "Departments",

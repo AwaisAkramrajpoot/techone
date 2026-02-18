@@ -4,9 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Menu, X, ChevronLeft } from "lucide-react";
 import { useState } from "react";
-import { Button } from "@/components/ui/button";
 
 const menuItems = [
   {
@@ -26,7 +24,7 @@ const menuItems = [
   },
   {
     title: "HR",
-    href: "/orders",
+    href: "/hr/department",
     icon: "/svgs/HR.svg",
   },
 ];
@@ -71,7 +69,10 @@ export function Sidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
         
           <nav className="flex-1 space-y-1 overflow-y-auto px-2 py-4">
             {menuItems.map((item) => {
-              const isActive = pathname === item.href;
+              const isActive =
+                item.title === "HR"
+                  ? pathname.startsWith("/hr")
+                  : pathname === item.href;
 
               return (
                 <Link

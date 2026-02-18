@@ -12,6 +12,10 @@ import { AllowanceDeductionView } from "@/components/hr/AllowanceDeductionView";
 import { AdvancedView } from "@/components/hr/AdvancedView";
 import { LoanView } from "@/components/hr/LoanView";
 import { ExpensesView } from "@/components/hr/ExpensesView";
+import { PayrollView } from "@/components/hr/PayrollView";
+import { OvertimeView } from "@/components/hr/OvertimeView";
+import { BonusView } from "@/components/hr/BonusView";
+import { IncrementView } from "@/components/hr/IncrementView";
 import { getHrTabBySlug } from "@/components/hr/hr-tabs";
 
 type HrTabPageProps = {
@@ -72,6 +76,22 @@ export default async function HrTabPage({ params }: HrTabPageProps) {
 
   if (activeTab.slug === "expenses") {
     return <ExpensesView />;
+  }
+
+  if (activeTab.slug === "payroll") {
+    return <PayrollView />;
+  }
+
+  if (activeTab.slug === "overtime") {
+    return <OvertimeView />;
+  }
+
+  if (activeTab.slug === "bonus") {
+    return <BonusView />;
+  }
+
+  if (activeTab.slug === "increment") {
+    return <IncrementView />;
   }
 
   return <HrContentView title={activeTab.title} label={activeTab.label} />;

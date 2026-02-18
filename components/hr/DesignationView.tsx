@@ -6,32 +6,33 @@ import { Input } from "@/components/ui/input";
 import { Plus, Search, Pencil, Trash2, Ban, ArrowLeft } from "lucide-react";
 import { useHrLayout } from "@/components/hr/HrLayoutContext";
 import {
-  departmentDummyRows,
-  type DepartmentRow,
-  type DepartmentStatus,
-} from "@/components/hr/data/department-data";
+  designationDummyRows,
+  type DesignationRow,
+  type DesignationStatus,
+} from "@/components/hr/data/designation-data";
 import {
-  DepartmentModal,
-  type DepartmentFormValues,
-} from "@/components/hr/modals/DepartmentModal";
+  DesignationModal,
+  type DesignationFormValues,
+} from "@/components/hr/modals/DesignationModal";
 
-const defaultFormValues: DepartmentFormValues = {
+const defaultFormValues: DesignationFormValues = {
   company: "",
   branch: "",
-  departmentName: "",
+  department: "",
+  designationName: "",
   isActive: true,
 };
 
-export function DepartmentView() {
+export function DesignationView() {
   const hrLayout = useHrLayout();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [rows, setRows] = useState<DepartmentRow[]>([]);
+  const [rows, setRows] = useState<DesignationRow[]>([]);
   const [search, setSearch] = useState("");
-  const [formValues, setFormValues] = useState<DepartmentFormValues>(
+  const [formValues, setFormValues] = useState<DesignationFormValues>(
     defaultFormValues
   );
 
-  const statusClass = (status: DepartmentStatus) => {
+  const statusClass = (status: DesignationStatus) => {
     if (status === "Active") return "bg-[#DFF4FF] text-[#2EA8DF]";
     if (status === "Expiring Soon") return "bg-[#FFE8CC] text-[#FF8A00]";
     return "bg-[#FFD9EC] text-[#D63384]";
@@ -44,7 +45,7 @@ export function DepartmentView() {
       (row) =>
         row.company.toLowerCase().includes(term) ||
         row.branch.toLowerCase().includes(term) ||
-        row.department.toLowerCase().includes(term)
+        row.designation.toLowerCase().includes(term)
     );
   }, [rows, search]);
 
@@ -57,19 +58,20 @@ export function DepartmentView() {
     if (
       !formValues.company ||
       !formValues.branch ||
-      !formValues.departmentName
+      !formValues.department ||
+      !formValues.designationName
     ) {
       return;
     }
 
-    const seed = rows.length === 0 ? departmentDummyRows : [];
+    const seed = rows.length === 0 ? designationDummyRows : [];
     const nextId = [...seed, ...rows].length + 1;
 
-    const newRow: DepartmentRow = {
+    const newRow: DesignationRow = {
       id: nextId,
       company: formValues.company,
       branch: formValues.branch,
-      department: formValues.departmentName,
+      designation: formValues.designationName,
       status: formValues.isActive ? "Active" : "Expired",
     };
 
@@ -97,10 +99,10 @@ export function DepartmentView() {
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
           <h1 className="text-3xl font-semibold text-[#0C4BA7]">
-            Department Management
+            Designation Management
           </h1>
           <p className="mt-1 text-sm text-[#667085]">
-            Organize teams for clarity and efficiency
+            Organize titles for clarity and structure
           </p>
         </div>
 
@@ -110,7 +112,7 @@ export function DepartmentView() {
             onClick={() => setIsModalOpen(true)}
           >
             <Plus className="mr-1.5 h-4 w-4" />
-            Add Department
+            Add Designation
           </Button>
           <Button
             variant="outline"
@@ -156,7 +158,7 @@ export function DepartmentView() {
                 <tr className="bg-[#F8FAFC] text-left text-[#111827]">
                   <th className="px-3 py-3 font-semibold">Company name</th>
                   <th className="px-3 py-3 font-semibold">Branch Name</th>
-                  <th className="px-3 py-3 font-semibold">Department Name</th>
+                  <th className="px-3 py-3 font-semibold">Designation Name</th>
                   <th className="px-3 py-3 font-semibold">Status</th>
                   <th className="px-3 py-3 font-semibold">Actions</th>
                 </tr>
@@ -169,7 +171,7 @@ export function DepartmentView() {
                   >
                     <td className="px-3 py-3 text-[#374151]">{row.company}</td>
                     <td className="px-3 py-3 text-[#374151]">{row.branch}</td>
-                    <td className="px-3 py-3 text-[#374151]">{row.department}</td>
+                    <td className="px-3 py-3 text-[#374151]">{row.designation}</td>
                     <td className="px-3 py-3">
                       <span
                         className={`rounded-full px-2 py-1 text-xs font-medium ${statusClass(
@@ -194,7 +196,7 @@ export function DepartmentView() {
         </div>
       )}
 
-      <DepartmentModal
+      <DesignationModal
         isOpen={isModalOpen}
         values={formValues}
         onFieldChange={(field, value) =>

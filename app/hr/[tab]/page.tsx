@@ -5,6 +5,7 @@ import { DesignationView } from "@/components/hr/DesignationView";
 import { GradeView } from "@/components/hr/GradeView";
 import { HolidayView } from "@/components/hr/HolidayView";
 import { LeaveTypeView } from "@/components/hr/LeaveTypeView";
+import { LeaveDetailsView } from "@/components/hr/LeaveDetailsView";
 import { getHrTabBySlug } from "@/components/hr/hr-tabs";
 
 type HrTabPageProps = {
@@ -37,6 +38,10 @@ export default async function HrTabPage({ params }: HrTabPageProps) {
 
   if (activeTab.slug === "leave-type") {
     return <LeaveTypeView />;
+  }
+
+  if (activeTab.slug === "leave-details") {
+    return <LeaveDetailsView />;
   }
 
   return <HrContentView title={activeTab.title} label={activeTab.label} />;

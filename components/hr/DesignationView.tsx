@@ -28,6 +28,9 @@ export function DesignationView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rows, setRows] = useState<DesignationRow[]>([]);
   const [search, setSearch] = useState("");
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof DesignationFormValues, string>>
+  >({});
   const [formValues, setFormValues] = useState<DesignationFormValues>(
     defaultFormValues
   );
@@ -52,15 +55,26 @@ export function DesignationView() {
   const closeModal = () => {
     setIsModalOpen(false);
     setFormValues(defaultFormValues);
+    setErrors({});
+  };
+
+  const handleFieldChange = <K extends keyof DesignationFormValues>(
+    field: K,
+    value: DesignationFormValues[K]
+  ) => {
+    setFormValues((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleSave = () => {
-    if (
-      !formValues.company ||
-      !formValues.branch ||
-      !formValues.department ||
-      !formValues.designationName
-    ) {
+    const nextErrors: Partial<Record<keyof DesignationFormValues, string>> = {};
+    if (!formValues.company) nextErrors.company = "Please fill this field";
+    if (!formValues.branch) nextErrors.branch = "Please fill this field";
+    if (!formValues.department) nextErrors.department = "Please fill this field";
+    if (!formValues.designationName)
+      nextErrors.designationName = "Please fill this field";
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
       return;
     }
 
@@ -199,9 +213,8 @@ export function DesignationView() {
       <DesignationModal
         isOpen={isModalOpen}
         values={formValues}
-        onFieldChange={(field, value) =>
-          setFormValues((prev) => ({ ...prev, [field]: value }))
-        }
+        errors={errors}
+        onFieldChange={handleFieldChange}
         onClose={closeModal}
         onSave={handleSave}
       />

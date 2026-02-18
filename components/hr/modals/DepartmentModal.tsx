@@ -14,6 +14,7 @@ export type DepartmentFormValues = {
 type DepartmentModalProps = {
   isOpen: boolean;
   values: DepartmentFormValues;
+  errors: Partial<Record<keyof DepartmentFormValues, string>>;
   onFieldChange: <K extends keyof DepartmentFormValues>(
     field: K,
     value: DepartmentFormValues[K]
@@ -25,6 +26,7 @@ type DepartmentModalProps = {
 export function DepartmentModal({
   isOpen,
   values,
+  errors,
   onFieldChange,
   onClose,
   onSave,
@@ -51,12 +53,17 @@ export function DepartmentModal({
             <select
               value={values.company}
               onChange={(e) => onFieldChange("company", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.company ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select company</option>
               <option value="Tech Solutions Pvt Ltd">Tech Solutions Pvt Ltd</option>
               <option value="Global Enterprises">Global Enterprises</option>
             </select>
+            {errors.company ? (
+              <p className="mt-1 text-xs text-red-500">{errors.company}</p>
+            ) : null}
           </div>
 
           <div>
@@ -66,13 +73,18 @@ export function DepartmentModal({
             <select
               value={values.branch}
               onChange={(e) => onFieldChange("branch", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.branch ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select branch</option>
               <option value="Tech Solutions - Main">Tech Solutions - Main</option>
               <option value="Tech Solutions - East">Tech Solutions - East</option>
               <option value="Global Enterprise">Global Enterprise</option>
             </select>
+            {errors.branch ? (
+              <p className="mt-1 text-xs text-red-500">{errors.branch}</p>
+            ) : null}
           </div>
 
           <div>
@@ -83,8 +95,13 @@ export function DepartmentModal({
               value={values.departmentName}
               onChange={(e) => onFieldChange("departmentName", e.target.value)}
               placeholder="Enter department name"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.departmentName ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.departmentName ? (
+              <p className="mt-1 text-xs text-red-500">{errors.departmentName}</p>
+            ) : null}
           </div>
 
           <div>

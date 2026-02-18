@@ -40,6 +40,9 @@ export function LeaveDetailsView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rows, setRows] = useState<LeaveDetailsRow[]>([]);
   const [search, setSearch] = useState("");
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof LeaveDetailsFormValues, string>>
+  >({});
   const [formValues, setFormValues] = useState<LeaveDetailsFormValues>(
     defaultFormValues
   );
@@ -64,16 +67,29 @@ export function LeaveDetailsView() {
   const closeModal = () => {
     setIsModalOpen(false);
     setFormValues(defaultFormValues);
+    setErrors({});
+  };
+
+  const handleFieldChange = <K extends keyof LeaveDetailsFormValues>(
+    field: K,
+    value: LeaveDetailsFormValues[K]
+  ) => {
+    setFormValues((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleSave = () => {
-    if (
-      !formValues.department ||
-      !formValues.employee ||
-      !formValues.leaveType ||
-      !formValues.startDate ||
-      !formValues.days
-    ) {
+    const nextErrors: Partial<Record<keyof LeaveDetailsFormValues, string>> = {};
+    if (!formValues.department) nextErrors.department = "Please fill this field";
+    if (!formValues.employee) nextErrors.employee = "Please fill this field";
+    if (!formValues.leaveType) nextErrors.leaveType = "Please fill this field";
+    if (!formValues.startDate) nextErrors.startDate = "Please fill this field";
+    if (!formValues.endDate) nextErrors.endDate = "Please fill this field";
+    if (!formValues.days) nextErrors.days = "Please fill this field";
+    if (!formValues.reason) nextErrors.reason = "Please fill this field";
+    if (!formValues.contact) nextErrors.contact = "Please fill this field";
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
       return;
     }
 
@@ -229,9 +245,8 @@ export function LeaveDetailsView() {
       <LeaveDetailsModal
         isOpen={isModalOpen}
         values={formValues}
-        onFieldChange={(field, value) =>
-          setFormValues((prev) => ({ ...prev, [field]: value }))
-        }
+        errors={errors}
+        onFieldChange={handleFieldChange}
         onClose={closeModal}
         onSave={handleSave}
         onClear={handleClear}

@@ -16,6 +16,7 @@ export type HolidayFormValues = {
 type HolidayModalProps = {
   isOpen: boolean;
   values: HolidayFormValues;
+  errors: Partial<Record<keyof HolidayFormValues, string>>;
   onFieldChange: <K extends keyof HolidayFormValues>(
     field: K,
     value: HolidayFormValues[K]
@@ -28,6 +29,7 @@ type HolidayModalProps = {
 export function HolidayModal({
   isOpen,
   values,
+  errors,
   onFieldChange,
   onClose,
   onSave,
@@ -54,8 +56,13 @@ export function HolidayModal({
               value={values.holidayName}
               onChange={(e) => onFieldChange("holidayName", e.target.value)}
               placeholder="Enter holiday name"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.holidayName ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.holidayName ? (
+              <p className="mt-1 text-xs text-red-500">{errors.holidayName}</p>
+            ) : null}
           </div>
 
           <div>
@@ -66,8 +73,13 @@ export function HolidayModal({
               value={values.holidayCode}
               onChange={(e) => onFieldChange("holidayCode", e.target.value)}
               placeholder="Enter holiday ID"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.holidayCode ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.holidayCode ? (
+              <p className="mt-1 text-xs text-red-500">{errors.holidayCode}</p>
+            ) : null}
           </div>
 
           <div>
@@ -78,8 +90,13 @@ export function HolidayModal({
               type="date"
               value={values.startDate}
               onChange={(e) => onFieldChange("startDate", e.target.value)}
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.startDate ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.startDate ? (
+              <p className="mt-1 text-xs text-red-500">{errors.startDate}</p>
+            ) : null}
           </div>
 
           <div>
@@ -90,8 +107,13 @@ export function HolidayModal({
               type="date"
               value={values.endDate}
               onChange={(e) => onFieldChange("endDate", e.target.value)}
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.endDate ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.endDate ? (
+              <p className="mt-1 text-xs text-red-500">{errors.endDate}</p>
+            ) : null}
           </div>
 
           <div>
@@ -102,8 +124,13 @@ export function HolidayModal({
               value={values.daysCount}
               onChange={(e) => onFieldChange("daysCount", e.target.value)}
               placeholder="Enter number of employees"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.daysCount ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.daysCount ? (
+              <p className="mt-1 text-xs text-red-500">{errors.daysCount}</p>
+            ) : null}
           </div>
 
           <div>

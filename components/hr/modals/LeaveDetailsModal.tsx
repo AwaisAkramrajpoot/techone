@@ -20,6 +20,7 @@ export type LeaveDetailsFormValues = {
 type LeaveDetailsModalProps = {
   isOpen: boolean;
   values: LeaveDetailsFormValues;
+  errors: Partial<Record<keyof LeaveDetailsFormValues, string>>;
   onFieldChange: <K extends keyof LeaveDetailsFormValues>(
     field: K,
     value: LeaveDetailsFormValues[K]
@@ -32,6 +33,7 @@ type LeaveDetailsModalProps = {
 export function LeaveDetailsModal({
   isOpen,
   values,
+  errors,
   onFieldChange,
   onClose,
   onSave,
@@ -57,13 +59,18 @@ export function LeaveDetailsModal({
             <select
               value={values.department}
               onChange={(e) => onFieldChange("department", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.department ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select Department</option>
               <option value="Engineering">Engineering</option>
               <option value="Operations">Operations</option>
               <option value="Finance">Finance</option>
             </select>
+            {errors.department ? (
+              <p className="mt-1 text-xs text-red-500">{errors.department}</p>
+            ) : null}
           </div>
 
           <div>
@@ -73,13 +80,18 @@ export function LeaveDetailsModal({
             <select
               value={values.employee}
               onChange={(e) => onFieldChange("employee", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.employee ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select Employee</option>
               <option value="Kaleem">Kaleem</option>
               <option value="Aleem">Aleem</option>
               <option value="Amir">Amir</option>
             </select>
+            {errors.employee ? (
+              <p className="mt-1 text-xs text-red-500">{errors.employee}</p>
+            ) : null}
           </div>
 
           <div>
@@ -89,12 +101,17 @@ export function LeaveDetailsModal({
             <select
               value={values.leaveType}
               onChange={(e) => onFieldChange("leaveType", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.leaveType ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select Leave Type</option>
               <option value="Annual Leave">Annual Leave</option>
               <option value="Sick Leave">Sick Leave</option>
             </select>
+            {errors.leaveType ? (
+              <p className="mt-1 text-xs text-red-500">{errors.leaveType}</p>
+            ) : null}
           </div>
 
           <div>
@@ -105,8 +122,13 @@ export function LeaveDetailsModal({
               type="date"
               value={values.startDate}
               onChange={(e) => onFieldChange("startDate", e.target.value)}
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.startDate ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.startDate ? (
+              <p className="mt-1 text-xs text-red-500">{errors.startDate}</p>
+            ) : null}
           </div>
 
           <div>
@@ -117,8 +139,13 @@ export function LeaveDetailsModal({
               type="date"
               value={values.endDate}
               onChange={(e) => onFieldChange("endDate", e.target.value)}
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.endDate ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.endDate ? (
+              <p className="mt-1 text-xs text-red-500">{errors.endDate}</p>
+            ) : null}
           </div>
 
           <div>
@@ -129,8 +156,13 @@ export function LeaveDetailsModal({
               value={values.days}
               onChange={(e) => onFieldChange("days", e.target.value)}
               placeholder="Enter Days"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.days ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.days ? (
+              <p className="mt-1 text-xs text-red-500">{errors.days}</p>
+            ) : null}
           </div>
 
           <div>
@@ -141,8 +173,13 @@ export function LeaveDetailsModal({
               value={values.reason}
               onChange={(e) => onFieldChange("reason", e.target.value)}
               placeholder="Enter description for this leave type"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.reason ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.reason ? (
+              <p className="mt-1 text-xs text-red-500">{errors.reason}</p>
+            ) : null}
           </div>
 
           <div>
@@ -153,8 +190,13 @@ export function LeaveDetailsModal({
               value={values.contact}
               onChange={(e) => onFieldChange("contact", e.target.value)}
               placeholder="Phone Number Or Email"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.contact ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.contact ? (
+              <p className="mt-1 text-xs text-red-500">{errors.contact}</p>
+            ) : null}
           </div>
 
           <div>

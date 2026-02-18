@@ -26,6 +26,9 @@ export function GradeView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rows, setRows] = useState<GradeRow[]>([]);
   const [search, setSearch] = useState("");
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof GradeFormValues, string>>
+  >({});
   const [formValues, setFormValues] = useState<GradeFormValues>(
     defaultFormValues
   );
@@ -50,17 +53,27 @@ export function GradeView() {
   const closeModal = () => {
     setIsModalOpen(false);
     setFormValues(defaultFormValues);
+    setErrors({});
+  };
+
+  const handleFieldChange = <K extends keyof GradeFormValues>(
+    field: K,
+    value: GradeFormValues[K]
+  ) => {
+    setFormValues((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleSave = () => {
-    if (
-      !formValues.company ||
-      !formValues.branch ||
-      !formValues.department ||
-      !formValues.designation ||
-      !formValues.gradeName ||
-      !formValues.employees
-    ) {
+    const nextErrors: Partial<Record<keyof GradeFormValues, string>> = {};
+    if (!formValues.company) nextErrors.company = "Please fill this field";
+    if (!formValues.branch) nextErrors.branch = "Please fill this field";
+    if (!formValues.department) nextErrors.department = "Please fill this field";
+    if (!formValues.designation) nextErrors.designation = "Please fill this field";
+    if (!formValues.gradeName) nextErrors.gradeName = "Please fill this field";
+    if (!formValues.employees) nextErrors.employees = "Please fill this field";
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
       return;
     }
 
@@ -204,9 +217,8 @@ export function GradeView() {
       <GradeModal
         isOpen={isModalOpen}
         values={formValues}
-        onFieldChange={(field, value) =>
-          setFormValues((prev) => ({ ...prev, [field]: value }))
-        }
+        errors={errors}
+        onFieldChange={handleFieldChange}
         onClose={closeModal}
         onSave={handleSave}
         onClear={handleClear}

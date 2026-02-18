@@ -36,6 +36,9 @@ export function HolidayView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rows, setRows] = useState<HolidayRow[]>([]);
   const [search, setSearch] = useState("");
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof HolidayFormValues, string>>
+  >({});
   const [formValues, setFormValues] = useState<HolidayFormValues>(defaultFormValues);
 
   const statusClass = (status: HolidayStatus) => {
@@ -59,16 +62,26 @@ export function HolidayView() {
   const closeModal = () => {
     setIsModalOpen(false);
     setFormValues(defaultFormValues);
+    setErrors({});
+  };
+
+  const handleFieldChange = <K extends keyof HolidayFormValues>(
+    field: K,
+    value: HolidayFormValues[K]
+  ) => {
+    setFormValues((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleSave = () => {
-    if (
-      !formValues.holidayName ||
-      !formValues.holidayCode ||
-      !formValues.startDate ||
-      !formValues.endDate ||
-      !formValues.daysCount
-    ) {
+    const nextErrors: Partial<Record<keyof HolidayFormValues, string>> = {};
+    if (!formValues.holidayName) nextErrors.holidayName = "Please fill this field";
+    if (!formValues.holidayCode) nextErrors.holidayCode = "Please fill this field";
+    if (!formValues.startDate) nextErrors.startDate = "Please fill this field";
+    if (!formValues.endDate) nextErrors.endDate = "Please fill this field";
+    if (!formValues.daysCount) nextErrors.daysCount = "Please fill this field";
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
       return;
     }
 
@@ -215,9 +228,8 @@ export function HolidayView() {
       <HolidayModal
         isOpen={isModalOpen}
         values={formValues}
-        onFieldChange={(field, value) =>
-          setFormValues((prev) => ({ ...prev, [field]: value }))
-        }
+        errors={errors}
+        onFieldChange={handleFieldChange}
         onClose={closeModal}
         onSave={handleSave}
         onClear={handleClear}

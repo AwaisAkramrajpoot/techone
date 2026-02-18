@@ -27,6 +27,9 @@ export function DepartmentView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rows, setRows] = useState<DepartmentRow[]>([]);
   const [search, setSearch] = useState("");
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof DepartmentFormValues, string>>
+  >({});
   const [formValues, setFormValues] = useState<DepartmentFormValues>(
     defaultFormValues
   );
@@ -51,14 +54,25 @@ export function DepartmentView() {
   const closeModal = () => {
     setIsModalOpen(false);
     setFormValues(defaultFormValues);
+    setErrors({});
+  };
+
+  const handleFieldChange = <K extends keyof DepartmentFormValues>(
+    field: K,
+    value: DepartmentFormValues[K]
+  ) => {
+    setFormValues((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 
   const handleSave = () => {
-    if (
-      !formValues.company ||
-      !formValues.branch ||
-      !formValues.departmentName
-    ) {
+    const nextErrors: Partial<Record<keyof DepartmentFormValues, string>> = {};
+    if (!formValues.company) nextErrors.company = "Please fill this field";
+    if (!formValues.branch) nextErrors.branch = "Please fill this field";
+    if (!formValues.departmentName)
+      nextErrors.departmentName = "Please fill this field";
+    if (Object.keys(nextErrors).length > 0) {
+      setErrors(nextErrors);
       return;
     }
 
@@ -197,9 +211,8 @@ export function DepartmentView() {
       <DepartmentModal
         isOpen={isModalOpen}
         values={formValues}
-        onFieldChange={(field, value) =>
-          setFormValues((prev) => ({ ...prev, [field]: value }))
-        }
+        errors={errors}
+        onFieldChange={handleFieldChange}
         onClose={closeModal}
         onSave={handleSave}
       />

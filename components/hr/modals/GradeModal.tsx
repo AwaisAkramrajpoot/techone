@@ -16,6 +16,7 @@ export type GradeFormValues = {
 type GradeModalProps = {
   isOpen: boolean;
   values: GradeFormValues;
+  errors: Partial<Record<keyof GradeFormValues, string>>;
   onFieldChange: <K extends keyof GradeFormValues>(
     field: K,
     value: GradeFormValues[K]
@@ -28,6 +29,7 @@ type GradeModalProps = {
 export function GradeModal({
   isOpen,
   values,
+  errors,
   onFieldChange,
   onClose,
   onSave,
@@ -53,12 +55,17 @@ export function GradeModal({
             <select
               value={values.company}
               onChange={(e) => onFieldChange("company", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.company ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select company</option>
               <option value="Tech Solutions Pvt Ltd">Tech Solutions Pvt Ltd</option>
               <option value="Global Enterprises">Global Enterprises</option>
             </select>
+            {errors.company ? (
+              <p className="mt-1 text-xs text-red-500">{errors.company}</p>
+            ) : null}
           </div>
 
           <div>
@@ -68,13 +75,18 @@ export function GradeModal({
             <select
               value={values.branch}
               onChange={(e) => onFieldChange("branch", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.branch ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select branch</option>
               <option value="Tech Solutions - Main">Tech Solutions - Main</option>
               <option value="Tech Solutions - East">Tech Solutions - East</option>
               <option value="Global Enterprise">Global Enterprise</option>
             </select>
+            {errors.branch ? (
+              <p className="mt-1 text-xs text-red-500">{errors.branch}</p>
+            ) : null}
           </div>
 
           <div>
@@ -84,13 +96,18 @@ export function GradeModal({
             <select
               value={values.department}
               onChange={(e) => onFieldChange("department", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.department ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select Department</option>
               <option value="Engineering">Engineering</option>
               <option value="Operations">Operations</option>
               <option value="Finance">Finance</option>
             </select>
+            {errors.department ? (
+              <p className="mt-1 text-xs text-red-500">{errors.department}</p>
+            ) : null}
           </div>
 
           <div>
@@ -100,13 +117,18 @@ export function GradeModal({
             <select
               value={values.designation}
               onChange={(e) => onFieldChange("designation", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.designation ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select designation</option>
               <option value="Senior Developer">Senior Developer</option>
               <option value="Operations Manager">Operations Manager</option>
               <option value="Finance Analyst">Finance Analyst</option>
             </select>
+            {errors.designation ? (
+              <p className="mt-1 text-xs text-red-500">{errors.designation}</p>
+            ) : null}
           </div>
 
           <div>
@@ -117,8 +139,13 @@ export function GradeModal({
               value={values.gradeName}
               onChange={(e) => onFieldChange("gradeName", e.target.value)}
               placeholder="Enter grade name"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.gradeName ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.gradeName ? (
+              <p className="mt-1 text-xs text-red-500">{errors.gradeName}</p>
+            ) : null}
           </div>
 
           <div>
@@ -129,8 +156,13 @@ export function GradeModal({
               value={values.employees}
               onChange={(e) => onFieldChange("employees", e.target.value)}
               placeholder="Enter number of employees"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.employees ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.employees ? (
+              <p className="mt-1 text-xs text-red-500">{errors.employees}</p>
+            ) : null}
           </div>
         </div>
 

@@ -16,6 +16,7 @@ export type LeaveTypeFormValues = {
 type LeaveTypeModalProps = {
   isOpen: boolean;
   values: LeaveTypeFormValues;
+  errors: Partial<Record<keyof LeaveTypeFormValues, string>>;
   onFieldChange: <K extends keyof LeaveTypeFormValues>(
     field: K,
     value: LeaveTypeFormValues[K]
@@ -28,6 +29,7 @@ type LeaveTypeModalProps = {
 export function LeaveTypeModal({
   isOpen,
   values,
+  errors,
   onFieldChange,
   onClose,
   onSave,
@@ -53,12 +55,17 @@ export function LeaveTypeModal({
             <select
               value={values.company}
               onChange={(e) => onFieldChange("company", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.company ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select company</option>
               <option value="Tech Solutions Pvt Ltd">Tech Solutions Pvt Ltd</option>
               <option value="Global Enterprises">Global Enterprises</option>
             </select>
+            {errors.company ? (
+              <p className="mt-1 text-xs text-red-500">{errors.company}</p>
+            ) : null}
           </div>
 
           <div>
@@ -68,13 +75,18 @@ export function LeaveTypeModal({
             <select
               value={values.branch}
               onChange={(e) => onFieldChange("branch", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.branch ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             >
               <option value="">Select Branch</option>
               <option value="Tech Solutions - Main">Tech Solutions - Main</option>
               <option value="Tech Solutions - East">Tech Solutions - East</option>
               <option value="Global Enterprise">Global Enterprise</option>
             </select>
+            {errors.branch ? (
+              <p className="mt-1 text-xs text-red-500">{errors.branch}</p>
+            ) : null}
           </div>
 
           <div>
@@ -85,8 +97,13 @@ export function LeaveTypeModal({
               value={values.leaveType}
               onChange={(e) => onFieldChange("leaveType", e.target.value)}
               placeholder="Enter leave type"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.leaveType ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.leaveType ? (
+              <p className="mt-1 text-xs text-red-500">{errors.leaveType}</p>
+            ) : null}
           </div>
 
           <div>
@@ -97,8 +114,13 @@ export function LeaveTypeModal({
               value={values.abbreviation}
               onChange={(e) => onFieldChange("abbreviation", e.target.value)}
               placeholder="e.g., AL for Annual Leave"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.abbreviation ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.abbreviation ? (
+              <p className="mt-1 text-xs text-red-500">{errors.abbreviation}</p>
+            ) : null}
           </div>
 
           <div>
@@ -109,8 +131,13 @@ export function LeaveTypeModal({
               value={values.description}
               onChange={(e) => onFieldChange("description", e.target.value)}
               placeholder="Enter description for this leave type"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.description ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.description ? (
+              <p className="mt-1 text-xs text-red-500">{errors.description}</p>
+            ) : null}
           </div>
 
           <div>
@@ -121,8 +148,13 @@ export function LeaveTypeModal({
               value={values.maxDays}
               onChange={(e) => onFieldChange("maxDays", e.target.value)}
               placeholder="Enter maximum days allowed"
-              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+              className={`h-11 focus-visible:ring-[#04499E] ${
+                errors.maxDays ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
             />
+            {errors.maxDays ? (
+              <p className="mt-1 text-xs text-red-500">{errors.maxDays}</p>
+            ) : null}
           </div>
         </div>
 

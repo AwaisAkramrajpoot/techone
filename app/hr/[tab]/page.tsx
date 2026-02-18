@@ -7,6 +7,7 @@ import { HolidayView } from "@/components/hr/HolidayView";
 import { LeaveTypeView } from "@/components/hr/LeaveTypeView";
 import { LeaveDetailsView } from "@/components/hr/LeaveDetailsView";
 import { TimeShiftView } from "@/components/hr/TimeShiftView";
+import { EmployeeInfoView } from "@/components/hr/EmployeeInfoView";
 import { getHrTabBySlug } from "@/components/hr/hr-tabs";
 
 type HrTabPageProps = {
@@ -47,6 +48,10 @@ export default async function HrTabPage({ params }: HrTabPageProps) {
 
   if (activeTab.slug === "time-shift") {
     return <TimeShiftView />;
+  }
+
+  if (activeTab.slug === "employee-info") {
+    return <EmployeeInfoView />;
   }
 
   return <HrContentView title={activeTab.title} label={activeTab.label} />;

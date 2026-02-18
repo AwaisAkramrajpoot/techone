@@ -33,8 +33,8 @@ export function DesignationModal({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4">
-      <div className="w-full max-w-4xl rounded-md bg-white p-4 shadow-lg sm:p-6">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4 py-6">
+      <div className="max-h-[calc(100vh-3rem)] w-full max-w-4xl overflow-y-auto rounded-md bg-white p-4 shadow-lg sm:p-6">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold text-[#1F2937]">
             Add New Designation

@@ -4,42 +4,42 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
-export type GradeFormValues = {
+export type LeaveTypeFormValues = {
   company: string;
   branch: string;
-  department: string;
-  designation: string;
-  gradeName: string;
-  employees: string;
+  leaveType: string;
+  abbreviation: string;
+  description: string;
+  maxDays: string;
 };
 
-type GradeModalProps = {
+type LeaveTypeModalProps = {
   isOpen: boolean;
-  values: GradeFormValues;
-  onFieldChange: <K extends keyof GradeFormValues>(
+  values: LeaveTypeFormValues;
+  onFieldChange: <K extends keyof LeaveTypeFormValues>(
     field: K,
-    value: GradeFormValues[K]
+    value: LeaveTypeFormValues[K]
   ) => void;
   onClose: () => void;
   onSave: () => void;
   onClear: () => void;
 };
 
-export function GradeModal({
+export function LeaveTypeModal({
   isOpen,
   values,
   onFieldChange,
   onClose,
   onSave,
   onClear,
-}: GradeModalProps) {
+}: LeaveTypeModalProps) {
   if (!isOpen) return null;
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4 py-6">
       <div className="max-h-[calc(100vh-3rem)] w-full max-w-4xl overflow-y-auto rounded-md bg-white p-4 shadow-lg sm:p-6">
         <div className="mb-4 flex items-center justify-between">
-          <h2 className="text-2xl font-semibold text-[#1F2937]">Add New Grade</h2>
+          <h2 className="text-2xl font-semibold text-[#1F2937]">Add New Leave Type</h2>
           <button type="button" onClick={onClose} className="text-[#111827]">
             <X className="h-5 w-5" />
           </button>
@@ -70,7 +70,7 @@ export function GradeModal({
               onChange={(e) => onFieldChange("branch", e.target.value)}
               className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
             >
-              <option value="">Select branch</option>
+              <option value="">Select Branch</option>
               <option value="Tech Solutions - Main">Tech Solutions - Main</option>
               <option value="Tech Solutions - East">Tech Solutions - East</option>
               <option value="Global Enterprise">Global Enterprise</option>
@@ -79,56 +79,48 @@ export function GradeModal({
 
           <div>
             <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Department Name
-            </label>
-            <select
-              value={values.department}
-              onChange={(e) => onFieldChange("department", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
-            >
-              <option value="">Select Department</option>
-              <option value="Engineering">Engineering</option>
-              <option value="Operations">Operations</option>
-              <option value="Finance">Finance</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Designation
-            </label>
-            <select
-              value={values.designation}
-              onChange={(e) => onFieldChange("designation", e.target.value)}
-              className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
-            >
-              <option value="">Select designation</option>
-              <option value="Senior Developer">Senior Developer</option>
-              <option value="Operations Manager">Operations Manager</option>
-              <option value="Finance Analyst">Finance Analyst</option>
-            </select>
-          </div>
-
-          <div>
-            <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Grade Name
+              Leave type
             </label>
             <Input
-              value={values.gradeName}
-              onChange={(e) => onFieldChange("gradeName", e.target.value)}
-              placeholder="Enter grade name"
+              value={values.leaveType}
+              onChange={(e) => onFieldChange("leaveType", e.target.value)}
+              placeholder="Enter leave type"
               className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
             />
           </div>
 
           <div>
             <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Number of Employees
+              Abbreviation
             </label>
             <Input
-              value={values.employees}
-              onChange={(e) => onFieldChange("employees", e.target.value)}
-              placeholder="Enter number of employees"
+              value={values.abbreviation}
+              onChange={(e) => onFieldChange("abbreviation", e.target.value)}
+              placeholder="e.g., AL for Annual Leave"
+              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">
+              Description
+            </label>
+            <Input
+              value={values.description}
+              onChange={(e) => onFieldChange("description", e.target.value)}
+              placeholder="Enter description for this leave type"
+              className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
+            />
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">
+              Maximum Days Per Year
+            </label>
+            <Input
+              value={values.maxDays}
+              onChange={(e) => onFieldChange("maxDays", e.target.value)}
+              placeholder="Enter maximum days allowed"
               className="h-11 border-[#E5E7EB] focus-visible:ring-[#04499E]"
             />
           </div>
@@ -139,7 +131,7 @@ export function GradeModal({
             onClick={onSave}
             className="h-11 bg-[#04499E] text-white hover:bg-[#033E87]"
           >
-            Add Grade
+            Save Leave Type
           </Button>
           <Button
             variant="outline"

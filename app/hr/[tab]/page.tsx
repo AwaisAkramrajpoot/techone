@@ -8,6 +8,9 @@ import { LeaveTypeView } from "@/components/hr/LeaveTypeView";
 import { LeaveDetailsView } from "@/components/hr/LeaveDetailsView";
 import { TimeShiftView } from "@/components/hr/TimeShiftView";
 import { EmployeeInfoView } from "@/components/hr/EmployeeInfoView";
+import { AllowanceDeductionView } from "@/components/hr/AllowanceDeductionView";
+import { AdvancedView } from "@/components/hr/AdvancedView";
+import { LoanView } from "@/components/hr/LoanView";
 import { getHrTabBySlug } from "@/components/hr/hr-tabs";
 
 type HrTabPageProps = {
@@ -52,6 +55,18 @@ export default async function HrTabPage({ params }: HrTabPageProps) {
 
   if (activeTab.slug === "employee-info") {
     return <EmployeeInfoView />;
+  }
+
+  if (activeTab.slug === "allowance-deduction") {
+    return <AllowanceDeductionView />;
+  }
+
+  if (activeTab.slug === "advanced") {
+    return <AdvancedView />;
+  }
+
+  if (activeTab.slug === "loan") {
+    return <LoanView />;
   }
 
   return <HrContentView title={activeTab.title} label={activeTab.label} />;

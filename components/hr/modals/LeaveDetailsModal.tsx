@@ -2,6 +2,7 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRef } from "react";
 import { Upload, X } from "lucide-react";
 
 export type LeaveDetailsFormValues = {
@@ -39,6 +40,7 @@ export function LeaveDetailsModal({
   onSave,
   onClear,
 }: LeaveDetailsModalProps) {
+  const attachmentInputRef = useRef<HTMLInputElement>(null);
   if (!isOpen) return null;
 
   return (
@@ -219,9 +221,18 @@ export function LeaveDetailsModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">
               Attachment
             </label>
+            <input
+              ref={attachmentInputRef}
+              type="file"
+              accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+              className="hidden"
+              onChange={(e) =>
+                onFieldChange("attachmentName", e.target.files?.[0]?.name ?? "")
+              }
+            />
             <button
               type="button"
-              onClick={() => onFieldChange("attachmentName", "leave-proof.pdf")}
+              onClick={() => attachmentInputRef.current?.click()}
               className="flex h-24 w-full flex-col items-center justify-center rounded-md border border-dashed border-[#D0D5DD] text-[#98A2B3]"
             >
               <Upload className="h-4 w-4" />

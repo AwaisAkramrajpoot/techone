@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Check, Upload, X } from "lucide-react";
@@ -90,6 +90,11 @@ export function EmployeeRegistrationModal({
   onClose,
   onSubmit,
 }: EmployeeRegistrationModalProps) {
+  const pictureInputRef = useRef<HTMLInputElement>(null);
+  const cnicFrontInputRef = useRef<HTMLInputElement>(null);
+  const cnicBackInputRef = useRef<HTMLInputElement>(null);
+  const documentInputRef = useRef<HTMLInputElement>(null);
+
   const [currentStep, setCurrentStep] = useState(1);
   const [values, setValues] = useState<EmployeeRegistrationFormValues>(
     defaultValues
@@ -193,8 +198,8 @@ export function EmployeeRegistrationModal({
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4 py-6">
       <div className="max-h-[calc(100vh-3rem)] w-full max-w-4xl overflow-y-auto rounded-md bg-white p-4 shadow-lg sm:p-6">
-        <div className="mb-4 flex items-start justify-between">
-          <div className="pl-0 sm:pl-1">
+        <div className="relative mb-4">
+          <div className="text-center">
             <h2 className="text-2xl font-semibold text-[#1F2937]">
               Employee Registration
             </h2>
@@ -202,7 +207,11 @@ export function EmployeeRegistrationModal({
               Complete your profile to join our team and unlock your potential
             </p>
           </div>
-          <button type="button" onClick={onClose} className="text-[#111827]">
+          <button
+            type="button"
+            onClick={onClose}
+            className="absolute right-0 top-0 text-[#111827]"
+          >
             <X className="h-5 w-5" />
           </button>
         </div>
@@ -306,13 +315,22 @@ export function EmployeeRegistrationModal({
                 <label className="mb-2 block text-sm font-medium text-[#374151]">
                   Picture
                 </label>
+                <input
+                  ref={pictureInputRef}
+                  type="file"
+                  accept="image/*"
+                  className="hidden"
+                  onChange={(e) =>
+                    setField("picture", e.target.files?.[0]?.name ?? "")
+                  }
+                />
                 <button
                   type="button"
-                  onClick={() => setField("picture", "profile-photo.png")}
+                  onClick={() => pictureInputRef.current?.click()}
                   className="flex h-11 items-center gap-2 rounded-md border border-[#D0D5DD] px-3 text-xs text-[#6B7280]"
                 >
                   <Upload className="h-3.5 w-3.5" />
-                  Upload photo
+                  {values.picture || "Upload photo"}
                 </button>
               </div>
             </>
@@ -325,15 +343,26 @@ export function EmployeeRegistrationModal({
                 <label className="mb-2 block text-sm font-medium text-[#374151]">
                   CNIC Front Side
                 </label>
+                <input
+                  ref={cnicFrontInputRef}
+                  type="file"
+                  accept="image/*,.pdf"
+                  className="hidden"
+                  onChange={(e) =>
+                    setField("cnicFront", e.target.files?.[0]?.name ?? "")
+                  }
+                />
                 <button
                   type="button"
-                  onClick={() => setField("cnicFront", "cnic-front.jpg")}
+                  onClick={() => cnicFrontInputRef.current?.click()}
                   className={`flex h-24 w-full flex-col items-center justify-center rounded-md border border-dashed ${
                     errors.cnicFront ? "border-red-500" : "border-[#D0D5DD]"
                   } text-[#98A2B3]`}
                 >
                   <Upload className="h-4 w-4" />
-                  <span className="mt-1 text-xs">Click to upload CNIC front side</span>
+                  <span className="mt-1 text-xs">
+                    {values.cnicFront || "Click to upload CNIC front side"}
+                  </span>
                 </button>
                 {renderFieldError(errors.cnicFront)}
               </div>
@@ -341,15 +370,26 @@ export function EmployeeRegistrationModal({
                 <label className="mb-2 block text-sm font-medium text-[#374151]">
                   CNIC Back Side
                 </label>
+                <input
+                  ref={cnicBackInputRef}
+                  type="file"
+                  accept="image/*,.pdf"
+                  className="hidden"
+                  onChange={(e) =>
+                    setField("cnicBack", e.target.files?.[0]?.name ?? "")
+                  }
+                />
                 <button
                   type="button"
-                  onClick={() => setField("cnicBack", "cnic-back.jpg")}
+                  onClick={() => cnicBackInputRef.current?.click()}
                   className={`flex h-24 w-full flex-col items-center justify-center rounded-md border border-dashed ${
                     errors.cnicBack ? "border-red-500" : "border-[#D0D5DD]"
                   } text-[#98A2B3]`}
                 >
                   <Upload className="h-4 w-4" />
-                  <span className="mt-1 text-xs">Click to upload CNIC back side</span>
+                  <span className="mt-1 text-xs">
+                    {values.cnicBack || "Click to upload CNIC back side"}
+                  </span>
                 </button>
                 {renderFieldError(errors.cnicBack)}
               </div>
@@ -450,36 +490,86 @@ export function EmployeeRegistrationModal({
           {currentStep === 4 && (
             <>
               <h3 className="text-lg font-semibold text-[#1F2937]">Job Details</h3>
-              {[
-                ["company", "Select company"],
-                ["branch", "Select branch"],
-                ["department", "Select department"],
-                ["shift", "Select shift"],
-                ["designation", "Select designation"],
-              ].map(([key, label]) => (
-                <div key={key}>
-                  <select
-                    value={values[key as keyof EmployeeRegistrationFormValues] as string}
-                    onChange={(e) =>
-                      setField(
-                        key as keyof EmployeeRegistrationFormValues,
-                        e.target.value
-                      )
-                    }
-                    className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
-                      errors[key as keyof EmployeeRegistrationFormValues]
-                        ? "border-red-500"
-                        : "border-[#E5E7EB]"
-                    }`}
-                  >
-                    <option value="">{label}</option>
-                    <option value="Option 1">Option 1</option>
-                  </select>
-                  {renderFieldError(
-                    errors[key as keyof EmployeeRegistrationFormValues]
-                  )}
-                </div>
-              ))}
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Company
+                </label>
+                <select
+                  value={values.company}
+                  onChange={(e) => setField("company", e.target.value)}
+                  className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
+                    errors.company ? "border-red-500" : "border-[#E5E7EB]"
+                  }`}
+                >
+                  <option value="">Select company</option>
+                  <option value="Tech Solutions Pvt Ltd">Tech Solutions Pvt Ltd</option>
+                </select>
+                {renderFieldError(errors.company)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Branch
+                </label>
+                <select
+                  value={values.branch}
+                  onChange={(e) => setField("branch", e.target.value)}
+                  className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
+                    errors.branch ? "border-red-500" : "border-[#E5E7EB]"
+                  }`}
+                >
+                  <option value="">Select branch</option>
+                  <option value="Main">Main</option>
+                </select>
+                {renderFieldError(errors.branch)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Department
+                </label>
+                <select
+                  value={values.department}
+                  onChange={(e) => setField("department", e.target.value)}
+                  className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
+                    errors.department ? "border-red-500" : "border-[#E5E7EB]"
+                  }`}
+                >
+                  <option value="">Select department</option>
+                  <option value="HR">HR</option>
+                </select>
+                {renderFieldError(errors.department)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Shift
+                </label>
+                <select
+                  value={values.shift}
+                  onChange={(e) => setField("shift", e.target.value)}
+                  className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
+                    errors.shift ? "border-red-500" : "border-[#E5E7EB]"
+                  }`}
+                >
+                  <option value="">Select shift</option>
+                  <option value="Morning">Morning</option>
+                </select>
+                {renderFieldError(errors.shift)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Designation
+                </label>
+                <select
+                  value={values.designation}
+                  onChange={(e) => setField("designation", e.target.value)}
+                  className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
+                    errors.designation ? "border-red-500" : "border-[#E5E7EB]"
+                  }`}
+                >
+                  <option value="">Select designation</option>
+                  <option value="Manager">Manager</option>
+                </select>
+                {renderFieldError(errors.designation)}
+              </div>
               <Input
                 placeholder="Enter biometric ID (if available)"
                 value={values.biometricId}
@@ -504,9 +594,18 @@ export function EmployeeRegistrationModal({
               </select>
               {renderFieldError(errors.documentType)}
 
+              <input
+                ref={documentInputRef}
+                type="file"
+                accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"
+                className="hidden"
+                onChange={(e) =>
+                  setField("documentAttachment", e.target.files?.[0]?.name ?? "")
+                }
+              />
               <button
                 type="button"
-                onClick={() => setField("documentAttachment", "cv.pdf")}
+                onClick={() => documentInputRef.current?.click()}
                 className={`flex h-24 w-full flex-col items-center justify-center rounded-md border border-dashed ${
                   errors.documentAttachment ? "border-red-500" : "border-[#D0D5DD]"
                 } text-[#98A2B3]`}

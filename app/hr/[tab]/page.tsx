@@ -6,6 +6,7 @@ import { GradeView } from "@/components/hr/GradeView";
 import { HolidayView } from "@/components/hr/HolidayView";
 import { LeaveTypeView } from "@/components/hr/LeaveTypeView";
 import { LeaveDetailsView } from "@/components/hr/LeaveDetailsView";
+import { TimeShiftView } from "@/components/hr/TimeShiftView";
 import { getHrTabBySlug } from "@/components/hr/hr-tabs";
 
 type HrTabPageProps = {
@@ -42,6 +43,10 @@ export default async function HrTabPage({ params }: HrTabPageProps) {
 
   if (activeTab.slug === "leave-details") {
     return <LeaveDetailsView />;
+  }
+
+  if (activeTab.slug === "time-shift") {
+    return <TimeShiftView />;
   }
 
   return <HrContentView title={activeTab.title} label={activeTab.label} />;

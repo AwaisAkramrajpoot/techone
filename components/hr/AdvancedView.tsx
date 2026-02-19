@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Search, Pencil, Trash2, Ban, ArrowLeft } from "lucide-react";
+import { Plus, Search, ArrowLeft } from "lucide-react";
 import { useHrLayout } from "@/components/hr/HrLayoutContext";
 import {
   advancedDummyRows,
@@ -285,3 +285,4 @@ export function AdvancedView() {
     </section>
   );
 }
+

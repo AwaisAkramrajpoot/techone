@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Search, Pencil, Trash2, Ban, ArrowLeft } from "lucide-react";
+import { Plus, Search, ArrowLeft } from "lucide-react";
 import { useHrLayout } from "@/components/hr/HrLayoutContext";
 import {
   loanDummyRows,
@@ -227,9 +227,9 @@ export function LoanView() {
                     </td>
                     <td className="px-3 py-3">
                       <div className="flex items-center gap-3">
-                        <Pencil className="h-4 w-4 cursor-pointer text-[#0B63CE]" />
-                        <Trash2 className="h-4 w-4 cursor-pointer text-[#E11D48]" />
-                        <Ban className="h-4 w-4 cursor-pointer text-[#2EA8DF]" />
+                        <Image src='/svgs/edit.svg' alt="" width={16} height={16} />
+                        <Image src='/svgs/delete.svg' alt="" width={16} height={16} />
+                        <Image src='/svgs/alert.svg' alt="" width={16} height={16} />
                       </div>
                     </td>
                   </tr>
@@ -252,6 +252,7 @@ export function LoanView() {
     </section>
   );
 }
+
 
 
 

@@ -177,7 +177,13 @@ export function LeaveTypeView() {
       {filteredRows.length === 0 ? (
         <div className="flex min-h-[360px] items-center justify-center">
           <div className="text-center">
-            <p className="text-3xl text-[#D0D5DD]">!</p>
+                        <Image
+              src="/svgs/warning.svg"
+              alt=""
+              width={88}
+              height={88}
+              className="mx-auto"
+            />
             <p className="mt-2 text-3xl font-medium text-[#D0D5DD]">
               Add Company First!
             </p>
@@ -248,3 +254,6 @@ export function LeaveTypeView() {
     </section>
   );
 }
+
+
+

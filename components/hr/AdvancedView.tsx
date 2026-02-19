@@ -167,22 +167,20 @@ export function AdvancedView() {
 
         <div className="flex flex-wrap gap-2">
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87]"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white"
             onClick={() => setIsModalOpen(true)}
           >
             <Plus className="mr-1.5 h-4 w-4" />
             Add Advance
           </Button>
           <Button
-            variant="outline"
-            className="border-[#04499E] text-white gap-1 bg-[#04499E] "
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
             <Image src="/svgs/report.svg" alt="" width={18} height={18} />
             Report
           </Button>
           <Button
-            variant="outline"
-            className="border-[#04499E] text-white gap-1 bg-[#04499E]"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
             <Image src="/svgs/export.svg" alt="" width={18} height={18} />
             Export
@@ -205,8 +203,14 @@ export function AdvancedView() {
       {filteredRows.length === 0 ? (
         <div className="flex min-h-[360px] items-center justify-center">
           <div className="text-center">
-            <p className="text-3xl text-[#D0D5DD]">!</p>
-            <p className="mt-2 text-3xl font-medium text-[#D0D5DD]">
+          <Image
+            src="/svgs/warning.svg"
+            alt=""
+            width={88}
+            height={88}
+            className="mx-auto"
+          />
+            <p className="mt-2 text-3xl   text-[#D0D5DD]">
               Add Company First!
             </p>
           </div>

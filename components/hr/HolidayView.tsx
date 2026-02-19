@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -133,23 +134,23 @@ export function HolidayView() {
 
         <div className="flex flex-wrap gap-2">
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87]"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white"
             onClick={() => setIsModalOpen(true)}
           >
             <Plus className="mr-1.5 h-4 w-4" />
             Add Holiday
           </Button>
           <Button
-            variant="outline"
-            className="border-[#04499E] text-[#04499E] hover:bg-[#EEF5FF]"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
-            Export
+            <Image src="/svgs/report.svg" alt="" width={18} height={18} />
+            Report
           </Button>
           <Button
-            variant="outline"
-            className="border-[#04499E] text-[#04499E] hover:bg-[#EEF5FF]"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
-            Report
+            <Image src="/svgs/export.svg" alt="" width={18} height={18} />
+            Export
           </Button>
         </div>
       </div>
@@ -237,3 +238,4 @@ export function HolidayView() {
     </section>
   );
 }
+

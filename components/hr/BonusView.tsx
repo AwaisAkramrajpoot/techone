@@ -137,26 +137,24 @@ export function BonusView() {
 
         <div className="flex flex-wrap gap-2">
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87]"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white"
             onClick={() => setIsModalOpen(true)}
           >
             <Plus className="mr-1.5 h-4 w-4" />
             Add Bonus
           </Button>
           <Button
-                    variant="outline"
-                    className="border-[#04499E] text-white gap-1 bg-[#04499E] "
-                  >
-                    <Image src='/svgs/report.svg' alt="" width={18} height={18} />
-                    Report
-                  </Button>
-                  <Button
-                    variant="outline"
-                    className="border-[#04499E] text-white gap-1 bg-[#04499E]"
-                  >
-                    <Image src='/svgs/export.svg' alt="" width={18} height={18} />
-                    Export
-                  </Button>
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+          >
+            <Image src="/svgs/report.svg" alt="" width={18} height={18} />
+            Report
+          </Button>
+          <Button
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+          >
+            <Image src="/svgs/export.svg" alt="" width={18} height={18} />
+            Export
+          </Button>
         </div>
       </div>
 
@@ -227,3 +225,4 @@ export function BonusView() {
     </section>
   );
 }
+

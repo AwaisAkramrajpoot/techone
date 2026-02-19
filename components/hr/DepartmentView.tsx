@@ -119,28 +119,26 @@ export function DepartmentView() {
         </div>
 
         <div className="flex flex-wrap gap-2">
-  <Button
-    className="bg-[#04499E] hover:bg-[#033E87] text-white"
-    onClick={() => setIsModalOpen(true)}
-  >
-    <Plus className="mr-1.5 h-4 w-4" />
-    Add Department
-  </Button>
-
-  <Button
-    className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
-  >
-    <Image src='/svgs/report.svg' alt="" width={18} height={18} />
-    Report
-  </Button>
-
-  <Button
-    className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
-  >
-    <Image src='/svgs/export.svg' alt="" width={18} height={18} />
-    Export
-  </Button>
-</div>
+          <Button
+            className="bg-[#04499E] hover:bg-[#033E87] text-white"
+            onClick={() => setIsModalOpen(true)}
+          >
+            <Plus className="mr-1.5 h-4 w-4" />
+            Add Department
+          </Button>
+          <Button
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+          >
+            <Image src="/svgs/report.svg" alt="" width={18} height={18} />
+            Report
+          </Button>
+          <Button
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+          >
+            <Image src="/svgs/export.svg" alt="" width={18} height={18} />
+            Export
+          </Button>
+        </div>
 
       </div>
 
@@ -222,3 +220,4 @@ export function DepartmentView() {
     </section>
   );
 }
+

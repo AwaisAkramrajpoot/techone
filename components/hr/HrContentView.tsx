@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Plus, Search } from "lucide-react";
@@ -17,22 +18,21 @@ export function HrContentView({ title, label }: HrContentViewProps) {
             Organize teams for clarity and efficiency
           </p>
         </div>
-
         <div className="flex flex-wrap gap-2">
-          <Button className="bg-[#0F5FFF] hover:bg-[#0A4BD1]">
+          <Button className="bg-[#04499E] hover:bg-[#033E87] text-white">
             <Plus className="mr-1.5 h-4 w-4" />
             Add {label}
           </Button>
           <Button
-            variant="outline"
-            className="border-[#0F5FFF] text-[#0F5FFF] hover:bg-[#F0F5FF]"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
+            <Image src="/svgs/report.svg" alt="" width={18} height={18} />
             Report
           </Button>
           <Button
-            variant="outline"
-            className="border-[#0F5FFF] text-[#0F5FFF] hover:bg-[#F0F5FF]"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
+            <Image src="/svgs/export.svg" alt="" width={18} height={18} />
             Export
           </Button>
         </div>
@@ -59,3 +59,4 @@ export function HrContentView({ title, label }: HrContentViewProps) {
     </section>
   );
 }
+

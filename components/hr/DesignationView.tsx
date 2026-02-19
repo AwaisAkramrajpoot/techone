@@ -31,9 +31,8 @@ export function DesignationView() {
   const [errors, setErrors] = useState<
     Partial<Record<keyof DesignationFormValues, string>>
   >({});
-  const [formValues, setFormValues] = useState<DesignationFormValues>(
-    defaultFormValues
-  );
+  const [formValues, setFormValues] =
+    useState<DesignationFormValues>(defaultFormValues);
 
   const statusClass = (status: DesignationStatus) => {
     if (status === "Active") return "bg-[#DFF4FF] text-[#2EA8DF]";
@@ -70,7 +69,8 @@ export function DesignationView() {
     const nextErrors: Partial<Record<keyof DesignationFormValues, string>> = {};
     if (!formValues.company) nextErrors.company = "Please fill this field";
     if (!formValues.branch) nextErrors.branch = "Please fill this field";
-    if (!formValues.department) nextErrors.department = "Please fill this field";
+    if (!formValues.department)
+      nextErrors.department = "Please fill this field";
     if (!formValues.designationName)
       nextErrors.designationName = "Please fill this field";
     if (Object.keys(nextErrors).length > 0) {
@@ -185,7 +185,9 @@ export function DesignationView() {
                   >
                     <td className="px-3 py-3 text-[#374151]">{row.company}</td>
                     <td className="px-3 py-3 text-[#374151]">{row.branch}</td>
-                    <td className="px-3 py-3 text-[#374151]">{row.designation}</td>
+                    <td className="px-3 py-3 text-[#374151]">
+                      {row.designation}
+                    </td>
                     <td className="px-3 py-3">
                       <span
                         className={`rounded-full px-2 py-1 text-xs font-medium ${statusClass(

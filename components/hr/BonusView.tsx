@@ -11,6 +11,7 @@ import {
   type BonusStatus,
 } from "@/components/hr/data/bonus-data";
 import { BonusModal, type BonusFormValues } from "@/components/hr/modals/BonusModal";
+import Image from "next/image";
 
 const defaultFormValues: BonusFormValues = {
   employee: "",
@@ -143,17 +144,19 @@ export function BonusView() {
             Add Bonus
           </Button>
           <Button
-            variant="outline"
-            className="border-[#04499E] text-[#04499E] hover:bg-[#EEF5FF]"
-          >
-            Export
-          </Button>
-          <Button
-            variant="outline"
-            className="border-[#04499E] text-[#04499E] hover:bg-[#EEF5FF]"
-          >
-            Report
-          </Button>
+                    variant="outline"
+                    className="border-[#04499E] text-white gap-1 bg-[#04499E] "
+                  >
+                    <Image src='/svgs/report.svg' alt="" width={18} height={18} />
+                    Report
+                  </Button>
+                  <Button
+                    variant="outline"
+                    className="border-[#04499E] text-white gap-1 bg-[#04499E]"
+                  >
+                    <Image src='/svgs/export.svg' alt="" width={18} height={18} />
+                    Export
+                  </Button>
         </div>
       </div>
 

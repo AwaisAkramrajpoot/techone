@@ -11,8 +11,11 @@ import {
   type AdvancedStatus,
   type AdvancedType,
 } from "@/components/hr/data/advanced-data";
-import { AdvancedModal, type AdvancedFormValues } from "@/components/hr/modals/AdvancedModal";
-
+import {
+  AdvancedModal,
+  type AdvancedFormValues,
+} from "@/components/hr/modals/AdvancedModal";
+import Image from "next/image";
 const defaultFormValues: AdvancedFormValues = {
   applyDate: "",
   company: "",
@@ -30,7 +33,11 @@ function formatDateLabel(input: string) {
   if (!input) return "Oct 15, 2023";
   const date = new Date(input);
   if (Number.isNaN(date.getTime())) return "Oct 15, 2023";
-  return date.toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" });
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+  });
 }
 
 export function AdvancedView() {
@@ -38,8 +45,11 @@ export function AdvancedView() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rows, setRows] = useState<AdvancedRow[]>([]);
   const [search, setSearch] = useState("");
-  const [errors, setErrors] = useState<Partial<Record<keyof AdvancedFormValues, string>>>({});
-  const [formValues, setFormValues] = useState<AdvancedFormValues>(defaultFormValues);
+  const [errors, setErrors] = useState<
+    Partial<Record<keyof AdvancedFormValues, string>>
+  >({});
+  const [formValues, setFormValues] =
+    useState<AdvancedFormValues>(defaultFormValues);
 
   const statusClass = (status: AdvancedStatus) => {
     if (status === "Active") return "bg-[#DFF4FF] text-[#2EA8DF]";
@@ -83,12 +93,17 @@ export function AdvancedView() {
     if (!formValues.applyDate) nextErrors.applyDate = "Please fill this field";
     if (!formValues.company) nextErrors.company = "Please fill this field";
     if (!formValues.branch) nextErrors.branch = "Please fill this field";
-    if (!formValues.department) nextErrors.department = "Please fill this field";
+    if (!formValues.department)
+      nextErrors.department = "Please fill this field";
     if (!formValues.employee) nextErrors.employee = "Please fill this field";
-    if (!formValues.advanceType) nextErrors.advanceType = "Please fill this field";
-    if (!formValues.advanceName) nextErrors.advanceName = "Please fill this field";
-    if (!formValues.description) nextErrors.description = "Please fill this field";
-    if (!formValues.attachment) nextErrors.attachment = "Please fill this field";
+    if (!formValues.advanceType)
+      nextErrors.advanceType = "Please fill this field";
+    if (!formValues.advanceName)
+      nextErrors.advanceName = "Please fill this field";
+    if (!formValues.description)
+      nextErrors.description = "Please fill this field";
+    if (!formValues.attachment)
+      nextErrors.attachment = "Please fill this field";
 
     if (Object.keys(nextErrors).length > 0) {
       setErrors(nextErrors);
@@ -141,9 +156,12 @@ export function AdvancedView() {
 
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-[#0C4BA7]">Advanced Management</h1>
+          <h1 className="text-3xl font-semibold text-[#0C4BA7]">
+            Advanced Management
+          </h1>
           <p className="mt-1 text-sm text-[#667085]">
-            Welcome back, Admin! Here&apos;s what&apos;s happening with your data today
+            Welcome back, Admin! Here&apos;s what&apos;s happening with your
+            data today
           </p>
         </div>
 
@@ -157,15 +175,17 @@ export function AdvancedView() {
           </Button>
           <Button
             variant="outline"
-            className="border-[#04499E] text-[#04499E] hover:bg-[#EEF5FF]"
+            className="border-[#04499E] text-white gap-1 bg-[#04499E] "
           >
-            Export
+            <Image src="/svgs/report.svg" alt="" width={18} height={18} />
+            Report
           </Button>
           <Button
             variant="outline"
-            className="border-[#04499E] text-[#04499E] hover:bg-[#EEF5FF]"
+            className="border-[#04499E] text-white gap-1 bg-[#04499E]"
           >
-            Report
+            <Image src="/svgs/export.svg" alt="" width={18} height={18} />
+            Export
           </Button>
         </div>
       </div>
@@ -207,17 +227,30 @@ export function AdvancedView() {
               </thead>
               <tbody>
                 {filteredRows.map((row, index) => (
-                  <tr key={row.id} className={index % 2 ? "bg-[#F8FAFC]" : "bg-white"}>
+                  <tr
+                    key={row.id}
+                    className={index % 2 ? "bg-[#F8FAFC]" : "bg-white"}
+                  >
                     <td className="px-3 py-3 text-[#374151]">{row.code}</td>
                     <td className="px-3 py-3 text-[#374151]">{row.name}</td>
-                    <td className="px-3 py-3 text-[#374151]">{row.createdDate}</td>
+                    <td className="px-3 py-3 text-[#374151]">
+                      {row.createdDate}
+                    </td>
                     <td className="px-3 py-3">
-                      <span className={`rounded-full px-2 py-1 text-xs font-medium ${typeClass(row.type)}`}>
+                      <span
+                        className={`rounded-full px-2 py-1 text-xs font-medium ${typeClass(
+                          row.type
+                        )}`}
+                      >
                         {row.type}
                       </span>
                     </td>
                     <td className="px-3 py-3">
-                      <span className={`rounded-full px-2 py-1 text-xs font-medium ${statusClass(row.status)}`}>
+                      <span
+                        className={`rounded-full px-2 py-1 text-xs font-medium ${statusClass(
+                          row.status
+                        )}`}
+                      >
                         {row.status}
                       </span>
                     </td>

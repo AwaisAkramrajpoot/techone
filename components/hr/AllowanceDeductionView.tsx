@@ -15,7 +15,7 @@ import {
   AllowanceDeductionModal,
   type AllowanceDeductionFormValues,
 } from "@/components/hr/modals/AllowanceDeductionModal";
-
+import Image from "next/image";
 const defaultFormValues: AllowanceDeductionFormValues = {
   type: "",
   name: "",
@@ -144,18 +144,20 @@ export function AllowanceDeductionView() {
             <Plus className="mr-1.5 h-4 w-4" />
             Add New Entry
           </Button>
-          <Button
-            variant="outline"
-            className="border-[#04499E] text-[#04499E] hover:bg-[#EEF5FF]"
-          >
-            Report
-          </Button>
-          <Button
-            variant="outline"
-            className="border-[#04499E] text-[#04499E] hover:bg-[#EEF5FF]"
-          >
-            Export
-          </Button>
+           <Button
+                     variant="outline"
+                     className="border-[#04499E] text-white gap-1 bg-[#04499E] "
+                   >
+                     <Image src='/svgs/report.svg' alt="" width={18} height={18} />
+                     Report
+                   </Button>
+                   <Button
+                     variant="outline"
+                     className="border-[#04499E] text-white gap-1 bg-[#04499E]"
+                   >
+                     <Image src='/svgs/export.svg' alt="" width={18} height={18} />
+                     Export
+                   </Button>
         </div>
       </div>
 

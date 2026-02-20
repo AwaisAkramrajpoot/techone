@@ -72,9 +72,9 @@ export function EmployeeInfoView() {
 
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-[#0C4BA7]">Employee Info</h1>
+          <h1 className="text-2xl font-semibold text-[#0C4BA7]">Employee Info</h1>
           <p className="mt-1 text-sm text-[#667085]">
-            Welcome back! Here&apos;s what&apos;s happening at your workplace today.
+            Welcome back! Here&apos;s what&apos;s happening  at your workplace today.
           </p>
         </div>
         <div className="flex flex-wrap gap-2">

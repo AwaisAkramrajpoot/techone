@@ -27,6 +27,11 @@ const menuItems = [
     href: "/hr/department",
     icon: "/svgs/HR.svg",
   },
+  {
+    title: "Settings",
+    href: "/settings",
+    icon: "/svgs/user.svg",
+  },
 ];
 
 type SidebarProps = {

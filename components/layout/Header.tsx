@@ -1,5 +1,7 @@
 'use client';
 
+import { useEffect, useRef, useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { Search, Bell, Menu } from 'lucide-react';
 
 type HeaderProps = {
@@ -7,6 +9,24 @@ type HeaderProps = {
 };
 
 export function Header({ onToggleSidebar }: HeaderProps) {
+  const router = useRouter();
+  const [profileMenuOpen, setProfileMenuOpen] = useState(false);
+  const profileMenuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      if (
+        profileMenuRef.current &&
+        !profileMenuRef.current.contains(event.target as Node)
+      ) {
+        setProfileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
   return (
     <header className="sticky top-0 z-30 flex h-16 sm:h-20 items-center justify-between border-b bg-white px-3 sm:px-4 shadow-sm lg:px-8">
       <div className="flex items-center gap-2 sm:gap-3">
@@ -39,14 +59,45 @@ export function Header({ onToggleSidebar }: HeaderProps) {
             10
           </span>
         </button>
-        <div className="flex items-center gap-1.5 sm:gap-2">
-          <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#0F5FFF] to-[#4B8DFF] text-xs sm:text-sm font-semibold text-white shadow-sm">
-            JD
-          </div>
-          <div className="hidden text-left text-xs leading-tight sm:block">
-            <p className="font-semibold text-slate-900">John Doe</p>
-            <p className="text-[11px] text-slate-500">Admin</p>
-          </div>
+        <div className="relative" ref={profileMenuRef}>
+          <button
+            type="button"
+            onClick={() => setProfileMenuOpen((prev) => !prev)}
+            className="flex items-center gap-1.5 rounded-md p-1 sm:gap-2 hover:bg-slate-100"
+          >
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#0F5FFF] to-[#4B8DFF] text-xs sm:text-sm font-semibold text-white shadow-sm">
+              JD
+            </div>
+            <div className="hidden text-left text-xs leading-tight sm:block">
+              <p className="font-semibold text-slate-900">John Doe</p>
+              <p className="text-[11px] text-slate-500">Admin</p>
+            </div>
+          </button>
+
+          {profileMenuOpen && (
+            <div className="absolute right-0 mt-2 w-40 rounded-md border border-slate-200 bg-white py-1 shadow-lg">
+              <button
+                type="button"
+                onClick={() => {
+                  setProfileMenuOpen(false);
+                  router.push('/settings');
+                }}
+                className="w-full px-3 py-2 text-left text-sm text-slate-700 hover:bg-slate-100"
+              >
+                Profile
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setProfileMenuOpen(false);
+                  router.push('/login');
+                }}
+                className="w-full px-3 py-2 text-left text-sm text-red-600 hover:bg-red-50"
+              >
+                Logout
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </header>

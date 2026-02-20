@@ -18,7 +18,7 @@ export default function HrLayout({ children }: { children: React.ReactNode }) {
         <div className="flex flex-1 flex-col transition-all duration-300 lg:ml-60">
           <Header onToggleSidebar={() => setMobileSidebarOpen((open) => !open)} />
 
-          <main className="flex-1 px-4 py-4 sm:px-6 lg:px-8">
+          <main className="flex-1 px-4 py-4 sm:px-6 lg:px-2">
             <div className="   ">
               <div className="flex flex-col gap-4 p-4 lg:flex-row">
                 {showInnerSidebar && <HrInnerSidebar />}

@@ -1,13 +1,4 @@
-import {
-  Briefcase,
-  Coins,
-  FileText,
-  GraduationCap,
-  Landmark,
-  ShieldCheck,
-  Timer,
-  Wallet,
-} from "lucide-react";
+ 
 
 export const hrTabs = [
   {

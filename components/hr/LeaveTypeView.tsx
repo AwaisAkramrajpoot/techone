@@ -129,7 +129,7 @@ export function LeaveTypeView() {
 
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-[#0C4BA7]">
+          <h1 className="text-2xl font-semibold text-[#0C4BA7]">
             Leave Type Management
           </h1>
           <p className="mt-1 text-sm text-[#667085]">
@@ -138,20 +138,20 @@ export function LeaveTypeView() {
         </div>
         <div className="flex flex-wrap gap-2">
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87] text-white"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white text-[13px] "
             onClick={() => setIsModalOpen(true)}
           >
             <Plus className="mr-1.5 h-4 w-4" />
             Add Leave Type
           </Button>
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+            className="bg-[#04499E] hover:bg-[#033E87] text-white text-[13px] gap-1"
           >
             <Image src="/svgs/report.svg" alt="" width={18} height={18} />
             Report
           </Button>
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+            className="bg-[#04499E] hover:bg-[#033E87] text-[13px] text-white gap-1"
           >
             <Image src="/svgs/export.svg" alt="" width={18} height={18} />
             Export

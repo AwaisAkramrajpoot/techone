@@ -41,7 +41,7 @@ export function OvertimeModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4 py-6">
-      <div className="max-h-[calc(100vh-3rem)] w-full font-[poppins] [&_input::placeholder]:text-[#CCCCCC] [&_textarea::placeholder]:text-[#CCCCCC] max-w-3xl overflow-y-auto rounded-md bg-white p-4 shadow-lg sm:p-6">
+      <div className="max-h-[calc(100vh-3rem)] w-full font-[poppins] [&_input::placeholder]:text-[#CCCCCC] [&_textarea::placeholder]:text-[#CCCCCC] [&_select]:w-full [&_select]:min-w-0 [&_select]:max-w-full [&_select]:pr-9 [&_select]:overflow-hidden [&_select]:text-ellipsis [&_select]:whitespace-nowrap [&_option]:max-w-full [&_option]:whitespace-normal [&_option]:break-words max-w-3xl overflow-y-auto rounded-md bg-white p-4 shadow-lg sm:p-6">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold text-[#1F2937]">Add New Overtime Request</h2>
           <button type="button" onClick={onClose} className="text-[#111827]">
@@ -179,5 +179,8 @@ export function OvertimeModal({
     </div>
   );
 }
+
+
+
 
 

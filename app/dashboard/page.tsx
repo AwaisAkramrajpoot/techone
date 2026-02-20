@@ -200,7 +200,7 @@ export default function DashboardPage() {
       <div className="flex min-w-0 flex-1 flex-col transition-all duration-300 lg:ml-60">
         <Header onToggleSidebar={() => setMobileSidebarOpen((open) => !open)} />
 
-        <main className="min-w-0 flex-1 px-4 py-6 sm:px-6 lg:px-5">
+        <main className="min-w-0 flex-1 px-4 py-6 font-[inter] sm:px-6 lg:px-5">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
             {stats.map((item) => (
               <div
@@ -257,7 +257,7 @@ export default function DashboardPage() {
                 </ul>
 
                 {card.workflow ? (
-                  <div className="mt-3 rounded-xl border border-[#F8FAFD] bg-[#F8FAFD] p-3">
+                  <div className="mt-3 rounded-xl border border-[#F8FAFD] border-l-[3px] border-l-[#1abb9b] bg-[#F8FAFD] p-3">
                     <p className="text-base font-semibold text-[#111827]">{card.tags[0]}:</p>
                     <ul className="mt-2 space-y-2 text-sm text-[#374151]">
                       {card.workflow.map((step) => (

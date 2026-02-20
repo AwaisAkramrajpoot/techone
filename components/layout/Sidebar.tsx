@@ -12,16 +12,16 @@ const menuItems = [
     href: "/dashboard",
     icon: "/svgs/dashboard.svg",
   },
-  {
-    title: "Companies",
-    href: "/users",
-    icon: "/svgs/company.svg",
-  },
-  {
-    title: "Branch",
-    href: "/powerstation",
-    icon: "/svgs/branch.svg",
-  },
+  // {
+  //   title: "Companies",
+  //   href: "/users",
+  //   icon: "/svgs/company.svg",
+  // },
+  // {
+  //   title: "Branch",
+  //   href: "/powerstation",
+  //   icon: "/svgs/branch.svg",
+  // },
   {
     title: "HR",
     href: "/hr/department",

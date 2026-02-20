@@ -125,7 +125,7 @@ export function IncrementView() {
   }, []);
 
   return (
-    <section className="min-h-[560px] flex-1">
+    <section className="min-h-[560px] min-w-0 flex-1">
       {hrLayout && !hrLayout.showInnerSidebar && (
         <button
           type="button"
@@ -178,9 +178,10 @@ export function IncrementView() {
         </div>
       </div>
 
-      <div className="mt-6 rounded-lg border border-[#EEF1F6] bg-white p-3">
-        <div className="overflow-x-auto">
-          <table className="w-full min-w-[1120px] border-collapse text-sm">
+      <div className="mt-6 max-w-full rounded-lg border border-[#EEF1F6] bg-white p-3">
+        <div className="w-full max-w-full overflow-x-auto pb-1">
+          <table className="min-w-[1120px] whitespace-nowrap border-collapse text-sm">
+
             <thead>
               <tr className="bg-[#F8FAFC] text-left text-[#111827]">
                 <th className="px-3 py-3 font-semibold">Employee</th>

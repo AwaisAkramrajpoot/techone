@@ -210,8 +210,8 @@ export function AdvancedView() {
             height={88}
             className="mx-auto"
           />
-            <p className="mt-2 text-3xl   text-[#D0D5DD]">
-              Add Company First!
+            <p className="mt-2 text-2xl   text-[#D0D5DD]">
+              Add Advance First!
             </p>
           </div>
         </div>

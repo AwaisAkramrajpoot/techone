@@ -30,7 +30,7 @@ export function HrInnerSidebar() {
                   alt={tab.label}
                   width={14}
                   height={14}
-                  className={`h-3.5 w-3.5 shrink-0 ${isActive ? "brightness-0 invert" : ""}`}
+                  className={`h-3.5 w-3.5 shrink-0 brightness-0 ${isActive ? "invert" : ""}`}
                 />
               ) : (
                 <tab.icon className="h-3.5 w-3.5 shrink-0" />

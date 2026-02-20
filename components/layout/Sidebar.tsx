@@ -68,7 +68,7 @@ export function Sidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
               />
             </Link>
           </div> 
-            <div className="text-[15px]  px-3 mt-7 font-semibold uppercase text-[#5B5F62]">
+            <div className="text-[15px] ml-5 mt-7 font-semibold uppercase text-[#5B5F62]">
               Admin
             </div>
         
@@ -97,8 +97,8 @@ export function Sidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
                     width={16}
                     height={16}
                     className={cn(
-                      "h-4 w-4 shrink-0",
-                      isActive && "brightness-0 invert"
+                      "h-4 w-4 shrink-0 brightness-0",
+                      isActive && "invert"
                     )}
                   />
                   <span>{item.title}</span>

@@ -168,8 +168,8 @@ export function GradeView() {
               height={88}
               className="mx-auto"
             />
-            <p className="mt-2 text-3xl font-medium text-[#D0D5DD]">
-              Add Company First!
+            <p className="mt-2 text-2xl font-sm text-[#D0D5DD]">
+              Add Grade First!
             </p>
           </div>
         </div>

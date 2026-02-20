@@ -19,7 +19,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-white md:flex-row">
+    <div className="flex min-h-screen flex-col bg-white font-[poppins] md:flex-row">
       {/* Left Side - Illustration */}
       <div
         className="hidden lg:flex w-1/2 items-center justify-center"
@@ -38,10 +38,10 @@ export default function LoginPage() {
       </div>
 
       {/* Right Side - Form */}
-      <div className="flex flex-1 items-center justify-center bg-white px-4 py-10 sm:px-6">
-      <div className="w-full max-w-md border border-gray-100 rounded-2xl shadow-lg bg-white p-6">         
+      <div className="flex flex-1 items-center justify-center bg-white px-4 py-10 sm:px-6 [&_input::placeholder]:text-[#757575]">
+      <div className="w-full max-w-md border border-gray-100 rounded-2xl shadow-lg bg-white p-8">         
           <h1
-            className="text-center font-bold text-[25px]  py-4 tracking-widest"
+            className="text-center font-bold text-[23px]  py-4 tracking-widest"
             style={{ color: '#1a1a2e', letterSpacing: '0.08em' }}
           >
             WELCOME TO HR SYSTEM
@@ -96,7 +96,7 @@ export default function LoginPage() {
                 placeholder="User Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
+                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder:text-[#757575] focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
                 required
               />
             </div>
@@ -116,7 +116,7 @@ export default function LoginPage() {
                 placeholder="Email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
+                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder:text-[#757575] focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
                 required
               />
             </div>
@@ -136,7 +136,7 @@ export default function LoginPage() {
                 placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
+                className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder:text-[#757575] focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
                 required
               />
             </div>
@@ -185,7 +185,7 @@ export default function LoginPage() {
           </form>
 
           {/* Footer */}
-          <p className="mt-5 text-center text-xs text-gray-500">
+          <p className="mt-5 text-center text-[17px] text-gray-500 font-[opensans]">
             By continuing, you agree to the JobFind{' '}
             <a href="#" className="text-[#04499E] underline">
               Terms of Service

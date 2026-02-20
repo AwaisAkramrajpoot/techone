@@ -65,7 +65,7 @@ export function Header({ onToggleSidebar }: HeaderProps) {
             onClick={() => setProfileMenuOpen((prev) => !prev)}
             className="flex items-center gap-1.5 rounded-md p-1 sm:gap-2 hover:bg-slate-100"
           >
-            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#0F5FFF] to-[#4B8DFF] text-xs sm:text-sm font-semibold text-white shadow-sm">
+            <div className="flex h-8 w-8 sm:h-9 sm:w-9 items-center justify-center rounded-full bg-gradient-to-br from-[#04499E] to-[#04499E] text-xs sm:text-sm font-semibold text-white shadow-sm">
               JD
             </div>
             <div className="hidden text-left text-xs leading-tight sm:block">

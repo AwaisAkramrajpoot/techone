@@ -16,7 +16,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex min-h-screen flex-col bg-[#F8F8F8] md:flex-row">
+    <div className="flex min-h-screen flex-col bg-[#F8F8F8] font-[poppins] md:flex-row">
       {/* LEFT SIDE */}
       <div className="order-2 hidden w-1/2 items-center justify-center bg-[#F3F3F3] lg:order-1 lg:flex">
         <Image
@@ -30,9 +30,9 @@ export default function LoginPage() {
       </div>
 
       {/* RIGHT SIDE */}
-      <div className="order-1 flex flex-1 items-center justify-center bg-[#F8F8F8] px-4 py-10 sm:px-6 lg:order-2">
+      <div className="order-1 flex flex-1 items-center justify-center bg-[#F8F8F8] px-4 py-10 sm:px-6 lg:order-2 [&_input::placeholder]:text-[#757575]">
         <div className="w-full max-w-md border border-gray-100 rounded-2xl shadow-lg bg-white p-8 ">
-          <h1 className="text-center font-semibold text-[25px] tracking-widest  md:py-6 text-gray-800">
+          <h1 className="text-center font-semibold text-[22px] tracking-widest  md:py-6 text-gray-800">
             WELCOME TO HR SYSTEM
           </h1>
 
@@ -106,7 +106,7 @@ export default function LoginPage() {
           </form>
 
           {/* Footer */}
-          <p className="mt-6 text-center text-xs text-gray-500">
+          <p className="mt-6 text-center text-[17px] text-gray-500 font-[opensans]">
             By continuing, you agree to the JobFind{" "}
             <span className="text-[#04499E] underline cursor-pointer">
               Terms of Service

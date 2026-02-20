@@ -45,7 +45,7 @@ export function LeaveDetailsModal({
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4 py-6">
-      <div className="max-h-[calc(100vh-3rem)] w-full font-[poppins] max-w-3xl overflow-y-auto rounded-md bg-white p-4 shadow-lg sm:p-6">
+      <div className="max-h-[calc(100vh-3rem)] w-full font-[poppins] [&_input::placeholder]:text-[#CCCCCC] [&_textarea::placeholder]:text-[#CCCCCC] max-w-3xl overflow-y-auto rounded-md bg-white p-4 shadow-lg sm:p-6">
         <div className="mb-4 flex items-center justify-between">
           <h2 className="text-2xl font-semibold text-[#1F2937]">Apply for Leave</h2>
           <button type="button" onClick={onClose} className="text-[#111827]">
@@ -262,4 +262,5 @@ export function LeaveDetailsModal({
     </div>
   );
 }
+
 

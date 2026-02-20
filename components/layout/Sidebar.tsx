@@ -50,7 +50,7 @@ export function Sidebar({ mobileOpen, setMobileOpen }: SidebarProps) {
     <>
       <aside
         className={cn(
-          "fixed left-0 top-0 z-40 h-screen border-r border-[#E2E5EA] bg-[#FAFAFA] transition-all duration-300",
+          "fixed left-0 top-0 z-40 h-screen border-r border-[#E2E5EA] bg-[#FAFAFA] font-[poppins] transition-all duration-300",
           "w-60",
           isOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
         )}

@@ -89,4 +89,8 @@
   .font-\[poppins\] {
     font-family: var(--font-poppins), sans-serif;
   }
+
+  .font-\[opensans\] {
+    font-family: var(--font-open-sans), sans-serif;
+  }
 }

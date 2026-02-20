@@ -1,5 +1,4 @@
 import { notFound } from "next/navigation";
-import { HrContentView } from "@/components/hr/HrContentView";
 import { DepartmentView } from "@/components/hr/DepartmentView";
 import { DesignationView } from "@/components/hr/DesignationView";
 import { GradeView } from "@/components/hr/GradeView";
@@ -94,5 +93,5 @@ export default async function HrTabPage({ params }: HrTabPageProps) {
     return <IncrementView />;
   }
 
-  return <HrContentView title={activeTab.title} label={activeTab.label} />;
+  notFound();
 }

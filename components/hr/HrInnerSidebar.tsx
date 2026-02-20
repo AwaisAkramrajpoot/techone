@@ -24,17 +24,13 @@ export function HrInnerSidebar() {
                   : "text-[#334155] hover:bg-[#EAF0FF]"
               }`}
             >
-              {typeof tab.icon === "string" ? (
-                <Image
-                  src={tab.icon}
-                  alt={tab.label}
-                  width={14}
-                  height={14}
-                  className={`h-3.5 w-3.5 shrink-0 brightness-0 ${isActive ? "invert" : ""}`}
-                />
-              ) : (
-                <tab.icon className="h-3.5 w-3.5 shrink-0" />
-              )}
+              <Image
+                src={tab.icon}
+                alt={tab.label}
+                width={14}
+                height={14}
+                className={`h-3.5 w-3.5 shrink-0 brightness-0 ${isActive ? "invert" : ""}`}
+              />
               <span>{tab.label}</span>
             </Link>
           );

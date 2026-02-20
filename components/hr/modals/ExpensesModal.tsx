@@ -40,6 +40,31 @@ export function ExpensesModal({
   onClear,
 }: ExpensesModalProps) {
   if (!isOpen) return null;
+  const selectFields: Array<{
+    key: keyof ExpensesFormValues;
+    label: string;
+    placeholder: string;
+    options: string[];
+  }> = [
+    {
+      key: "company",
+      label: "Company",
+      placeholder: "Select company",
+      options: ["Tech Solutions", "Global Enterprise"],
+    },
+    {
+      key: "branch",
+      label: "Branch",
+      placeholder: "Select branch",
+      options: ["Main Branch", "East Branch"],
+    },
+    {
+      key: "department",
+      label: "Department",
+      placeholder: "Select department",
+      options: ["HR", "Finance"],
+    },
+  ];
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/25 px-4 py-6">
@@ -52,32 +77,24 @@ export function ExpensesModal({
         </div>
 
         <div className="space-y-4">
-          {[
-            ["company", "Company", "Select company", ["Tech Solutions", "Global Enterprise"]],
-            ["branch", "Branch", "Select branch", ["Main Branch", "East Branch"]],
-            ["department", "Department", "Select department", ["HR", "Finance"]],
-          ].map(([key, label, placeholder, options]) => (
+          {selectFields.map(({ key, label, placeholder, options }) => (
             <div key={key}>
               <label className="mb-2 block text-sm font-medium text-[#374151]">{label}</label>
               <select
-                value={values[key as keyof ExpensesFormValues] as string}
-                onChange={(e) => onFieldChange(key as keyof ExpensesFormValues, e.target.value)}
+                value={values[key]}
+                onChange={(e) => onFieldChange(key, e.target.value)}
                 className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
-                  errors[key as keyof ExpensesFormValues] ? "border-red-500" : "border-[#E5E7EB]"
+                  errors[key] ? "border-red-500" : "border-[#E5E7EB]"
                 }`}
               >
                 <option value="">{placeholder}</option>
-                {(options as string[]).map((opt) => (
+                {options.map((opt) => (
                   <option key={opt} value={opt}>
                     {opt}
                   </option>
                 ))}
               </select>
-              {errors[key as keyof ExpensesFormValues] ? (
-                <p className="mt-1 text-xs text-red-500">
-                  {errors[key as keyof ExpensesFormValues]}
-                </p>
-              ) : null}
+              {errors[key] ? <p className="mt-1 text-xs text-red-500">{errors[key]}</p> : null}
             </div>
           ))}
 

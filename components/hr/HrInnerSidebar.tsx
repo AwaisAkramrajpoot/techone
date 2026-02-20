@@ -9,7 +9,7 @@ export function HrInnerSidebar() {
   const pathname = usePathname();
 
   return (
-    <aside className="w-full shrink-0 rounded-md border border-[#E6EAF0] bg-[#FBFCFE] p-2 lg:w-56">
+    <aside className="w-full shrink-0 rounded-md border border-[#E6EAF0] bg-[#FBFCFE] p-2 font-[poppins] lg:w-56">
       <div className="space-y-1">
         {hrTabs.map((tab) => {
           const isActive = pathname === `/hr/${tab.slug}`;

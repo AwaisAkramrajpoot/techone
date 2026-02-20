@@ -125,7 +125,7 @@ export function IncrementView() {
   }, []);
 
   return (
-    <section className="min-h-[560px] min-w-0 flex-1">
+    <section className="min-h-[560px] min-w-0 flex-1 font-[poppins]">
       {hrLayout && !hrLayout.showInnerSidebar && (
         <button
           type="button"
@@ -136,10 +136,10 @@ export function IncrementView() {
         </button>
       )}
 
-      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+      <div className="flex flex-col gap-3 font-[poppins] md:flex-row md:items-start md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[#0C4BA7]">Salary Increment Management</h1>
-          <p className="mt-1 text-sm text-[#667085]">
+          <h1 className="text-2xl font-semibold font-[inter] text-[#0C4BA7]">Salary Increment Management</h1>
+          <p className="mt-1 text-sm  text-[#667085]">
             Manage salary increases, promotions, and compensation adjustments
           </p>
         </div>
@@ -183,7 +183,7 @@ export function IncrementView() {
           <table className="min-w-[1120px] whitespace-nowrap border-collapse text-sm">
 
             <thead>
-              <tr className="bg-[#F8FAFC] text-left text-[#111827]">
+              <tr className="bg-[#F8FAFC] font-[poppins] text-left text-[#111827]">
                 <th className="px-3 py-3 font-semibold">Employee</th>
                 <th className="px-3 py-3 font-semibold">Current Salary</th>
                 <th className="px-3 py-3 font-semibold">New Salary</th>
@@ -236,6 +236,7 @@ export function IncrementView() {
     </section>
   );
 }
+
 
 
 

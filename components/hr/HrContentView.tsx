@@ -10,10 +10,10 @@ type HrContentViewProps = {
 
 export function HrContentView({ title, label }: HrContentViewProps) {
   return (
-    <section className="min-h-[560px] flex-1">
+    <section className="min-h-[560px] flex-1 font-[poppins]">
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
-          <h1 className="text-3xl font-semibold text-[#0C4BA7]">{title}</h1>
+          <h1 className="text-3xl font-semibold text-[#0C4BA7] font-[inter]">{title}</h1>
           <p className="mt-1 text-sm text-[#667085]">
             Organize teams for clarity and efficiency
           </p>
@@ -65,6 +65,7 @@ export function HrContentView({ title, label }: HrContentViewProps) {
     </section>
   );
 }
+
 
 
 

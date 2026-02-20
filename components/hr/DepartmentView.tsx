@@ -97,7 +97,7 @@ export function DepartmentView() {
   }, []);
 
   return (
-    <section className="min-h-[560px] flex-1">
+    <section className="min-h-[560px] flex-1 font-[poppins]">
       {hrLayout && !hrLayout.showInnerSidebar && (
         <button
           type="button"
@@ -110,7 +110,7 @@ export function DepartmentView() {
 
       <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-[#0C4BA7]">
+          <h1 className="text-2xl font-semibold text-[#0C4BA7] font-[inter]">
             Department Management
           </h1>
           <p className="mt-1 text-sm text-[#667085]">
@@ -226,6 +226,7 @@ export function DepartmentView() {
     </section>
   );
 }
+
 
 
 

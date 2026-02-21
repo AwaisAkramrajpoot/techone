@@ -19,6 +19,8 @@ type EmployeeRegistrationModalProps = {
 
 type EmployeeRegistrationFormValues = {
   fullName: string;
+  caste: string;
+  guardianRelation: string;
   fatherName: string;
   cnic: string;
   mobile: string;
@@ -49,6 +51,8 @@ type EmployeeRegistrationFormValues = {
 
 const defaultValues: EmployeeRegistrationFormValues = {
   fullName: "",
+  caste: "",
+  guardianRelation: "",
   fatherName: "",
   cnic: "",
   mobile: "",
@@ -129,6 +133,9 @@ export function EmployeeRegistrationModal({
 
     if (currentStep === 1) {
       if (!values.fullName) nextErrors.fullName = "Please fill this field";
+      if (!values.caste) nextErrors.caste = "Please fill this field";
+      if (!values.guardianRelation)
+        nextErrors.guardianRelation = "Please select relation";
       if (!values.fatherName) nextErrors.fatherName = "Please fill this field";
       if (!values.cnic) nextErrors.cnic = "Please fill this field";
       if (!values.mobile) nextErrors.mobile = "Please fill this field";
@@ -185,7 +192,7 @@ export function EmployeeRegistrationModal({
     if (!validateCurrentStep()) return;
     onSubmit({
       name: values.fullName,
-      fatherName: values.fatherName,
+      fatherName: `${values.guardianRelation} ${values.fatherName}`.trim(),
       cnic: values.cnic,
       address: values.permStreet || values.resStreet,
       phone: values.mobile,
@@ -269,7 +276,47 @@ export function EmployeeRegistrationModal({
               </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-[#374151]">
-                  Father Name
+                  Caste
+                </label>
+                <select
+                  value={values.caste}
+                  onChange={(e) => setField("caste", e.target.value)}
+                  className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
+                    errors.caste ? "border-red-500" : "border-[#E5E7EB]"
+                  }`}
+                >
+                  <option value="">Select caste</option>
+                  <option value="Rajput">Rajput</option>
+                  <option value="Jutt">Jutt</option>
+                  <option value="Arain">Arain</option>
+                  <option value="Sheikh">Sheikh</option>
+                  <option value="Syed">Syed</option>
+                </select>
+                {renderFieldError(errors.caste)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Relation
+                </label>
+                <div className="flex flex-wrap items-center gap-4 rounded-md border border-[#E5E7EB] px-3 py-2">
+                  {["S/o", "D/o", "W/o"].map((relation) => (
+                    <label key={relation} className="inline-flex items-center gap-2 text-sm text-[#374151]">
+                      <input
+                        type="radio"
+                        name="guardianRelation"
+                        checked={values.guardianRelation === relation}
+                        onChange={() => setField("guardianRelation", relation)}
+                        className="h-4 w-4 accent-[#04499E]"
+                      />
+                      {relation}
+                    </label>
+                  ))}
+                </div>
+                {renderFieldError(errors.guardianRelation)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Father/Husband Name
                 </label>
                 <Input
                   value={values.fatherName}
@@ -399,6 +446,18 @@ export function EmployeeRegistrationModal({
           {currentStep === 3 && (
             <>
               <h3 className="text-lg font-semibold text-[#1F2937]">Address Information</h3>
+              <select
+                value={values.country}
+                onChange={(e) => setField("country", e.target.value)}
+                className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
+                  errors.country ? "border-red-500" : "border-[#E5E7EB]"
+                }`}
+              >
+                <option value="">Select country</option>
+                <option value="Pakistan">Pakistan</option>
+                <option value="UAE">UAE</option>
+              </select>
+              {renderFieldError(errors.country)}
               <p className="text-xs text-[#98A2B3]">Permanent Address</p>
               <Input
                 placeholder="Street Address"
@@ -472,18 +531,6 @@ export function EmployeeRegistrationModal({
                 </>
               )}
 
-              <select
-                value={values.country}
-                onChange={(e) => setField("country", e.target.value)}
-                className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
-                  errors.country ? "border-red-500" : "border-[#E5E7EB]"
-                }`}
-              >
-                <option value="">Select country</option>
-                <option value="Pakistan">Pakistan</option>
-                <option value="UAE">UAE</option>
-              </select>
-              {renderFieldError(errors.country)}
             </>
           )}
 
@@ -591,6 +638,7 @@ export function EmployeeRegistrationModal({
                 <option value="">Select document type</option>
                 <option value="CV">CV</option>
                 <option value="Degree">Degree</option>
+                <option value="CNIC">CNIC</option>
               </select>
               {renderFieldError(errors.documentType)}
 
@@ -665,7 +713,7 @@ export function EmployeeRegistrationModal({
                 onClick={onFinalSubmit}
                 className="bg-[#04499E] text-white hover:bg-[#033E87]"
               >
-                Submit Registration
+                Save Employee
               </Button>
             )}
           </div>

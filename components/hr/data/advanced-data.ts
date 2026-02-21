@@ -1,5 +1,10 @@
 export type AdvancedStatus = "Active" | "Expiring Soon" | "Expired";
-export type AdvancedType = "Analytics" | "Transaction" | "Log";
+export type AdvancedType =
+  | "Salary Advance"
+  | "Emergency Advance"
+  | "Festival Advance"
+  | "Medical Advance"
+  | "Other";
 
 export type AdvancedRow = {
   id: number;
@@ -14,25 +19,25 @@ export const advancedDummyRows: AdvancedRow[] = [
   {
     id: 1,
     code: "#0001",
-    name: "Tech Solutions...",
+    name: "Salary Support",
     createdDate: "Oct 15, 2023",
-    type: "Analytics",
+    type: "Salary Advance",
     status: "Active",
   },
   {
     id: 2,
     code: "#0002",
-    name: "Global Enterprise",
+    name: "Emergency Help",
     createdDate: "Oct 18, 2023",
-    type: "Transaction",
+    type: "Emergency Advance",
     status: "Expiring Soon",
   },
   {
     id: 3,
     code: "#0003",
-    name: "Tech Solutions...",
+    name: "Medical Relief",
     createdDate: "Oct 12, 2023",
-    type: "Analytics",
+    type: "Medical Advance",
     status: "Active",
   },
 ];

@@ -32,6 +32,21 @@ function formatDateValue(date: string) {
   return `${parts[2]}/${parts[1]}/${parts[0]}`;
 }
 
+function getDaysCount(startDate: string, endDate: string) {
+  if (!startDate || !endDate) return "";
+
+  const start = new Date(startDate);
+  const end = new Date(endDate);
+
+  if (Number.isNaN(start.getTime()) || Number.isNaN(end.getTime()) || end < start) {
+    return "";
+  }
+
+  const msPerDay = 1000 * 60 * 60 * 24;
+  const diffInDays = Math.floor((end.getTime() - start.getTime()) / msPerDay) + 1;
+  return String(diffInDays);
+}
+
 export function HolidayView() {
   const hrLayout = useHrLayout();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -70,7 +85,18 @@ export function HolidayView() {
     field: K,
     value: HolidayFormValues[K]
   ) => {
-    setFormValues((prev) => ({ ...prev, [field]: value }));
+    setFormValues((prev) => {
+      const nextValues = { ...prev, [field]: value };
+
+      if (field === "startDate" || field === "endDate") {
+        return {
+          ...nextValues,
+          daysCount: getDaysCount(nextValues.startDate, nextValues.endDate),
+        };
+      }
+
+      return nextValues;
+    });
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 

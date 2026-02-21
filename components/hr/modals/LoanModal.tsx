@@ -78,9 +78,18 @@ export function LoanModal({
     },
     {
       key: "loanTerm",
-      label: "Loan Term (months)",
-      placeholder: "36 months",
-      options: ["36 months", "48 months", "60 months"],
+      label: "Loan Term (months) - Optional",
+      placeholder: "Select months (optional)",
+      options: [
+        "1 month",
+        "3 months",
+        "6 months",
+        "12 months",
+        "24 months",
+        "36 months",
+        "48 months",
+        "60 months",
+      ],
     },
     {
       key: "status",

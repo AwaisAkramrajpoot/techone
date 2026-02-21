@@ -113,6 +113,79 @@ export default function SettingsPage() {
           </section>
 
           <section className="mt-6 rounded-xl border border-[#DADDE3] bg-white p-6">
+            <h2 className="font-[inter] text-2xl font-semibold text-black">
+              Company Details
+            </h2>
+            <p className="mt-1 text-sm text-[#6B7280]">
+              Manage company profile and contact information
+            </p>
+
+            <div className="mt-5 flex flex-col gap-4 border-b border-[#E5E7EB] pb-6">
+              <div className="flex items-center gap-4">
+                <div className="flex h-20 w-20 items-center justify-center rounded-xl bg-[#EAF0FF] text-sm font-medium text-[#04499E]">
+                  Logo
+                </div>
+                <div>
+                  <Button
+                    variant="outline"
+                    className="h-10 border-[#D1D5DB] bg-white px-4 text-sm text-black hover:bg-[#F9FAFB]"
+                  >
+                    <Upload className="mr-2 h-4 w-4" />
+                    Upload Company Logo
+                  </Button>
+                  <p className="mt-2 text-sm text-[#6B7280]">
+                    JPG, PNG or SVG. Max size 2MB
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              <div>
+                <Label className="text-sm text-black">
+                  Company Name <span className="text-red-500">*</span>
+                </Label>
+                <Input
+                  defaultValue="Tech Solutions Pvt Ltd"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-white text-sm"
+                />
+              </div>
+              <div>
+                <Label className="text-sm text-black">Mobile Number</Label>
+                <Input
+                  defaultValue="+92 300 1234567"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-white text-sm"
+                />
+              </div>
+              <div>
+                <Label className="text-sm text-black">Emergency Number</Label>
+                <Input
+                  defaultValue="+92 301 7654321"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-white text-sm"
+                />
+              </div>
+              <div>
+                <Label className="text-sm text-black">NTN</Label>
+                <Input
+                  defaultValue="1234567-8"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-white text-sm"
+                />
+              </div>
+              <div className="md:col-span-2">
+                <Label className="text-sm text-black">Address</Label>
+                <Input
+                  defaultValue="Office #12, Main Boulevard, Lahore"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-white text-sm"
+                />
+              </div>
+            </div>
+
+            <Button className="mt-6 h-11 bg-[#04499E] px-5 text-sm text-white hover:bg-[#033E87]">
+              Save Company Details
+            </Button>
+          </section>
+
+          <section className="mt-6 rounded-xl border border-[#DADDE3] bg-white p-6">
             <h2 className="font-[inter] text-2xl font-semibold text-black">Security</h2>
             <p className="mt-1 text-sm text-[#6B7280]">
               Manage your password and security settings

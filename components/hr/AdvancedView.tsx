@@ -16,18 +16,31 @@ import {
   type AdvancedFormValues,
 } from "@/components/hr/modals/AdvancedModal";
 import Image from "next/image";
-const defaultFormValues: AdvancedFormValues = {
-  applyDate: "",
-  company: "",
-  branch: "",
-  department: "",
-  employee: "",
-  advanceType: "",
-  advanceName: "",
-  description: "",
-  attachment: "",
-  status: true,
-};
+
+function getTodayDateInputValue() {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function createDefaultFormValues(): AdvancedFormValues {
+  return {
+    applyDate: getTodayDateInputValue(),
+    company: "",
+    branch: "",
+    department: "",
+    employee: "",
+    advanceType: "",
+    advanceName: "",
+    description: "",
+    returnAmount: "",
+    approvalStatus: "",
+    attachment: "",
+    status: true,
+  };
+}
 
 function formatDateLabel(input: string) {
   if (!input) return "Oct 15, 2023";
@@ -49,7 +62,7 @@ export function AdvancedView() {
     Partial<Record<keyof AdvancedFormValues, string>>
   >({});
   const [formValues, setFormValues] =
-    useState<AdvancedFormValues>(defaultFormValues);
+    useState<AdvancedFormValues>(createDefaultFormValues());
 
   const statusClass = (status: AdvancedStatus) => {
     if (status === "Active") return "bg-[#DFF4FF] text-[#2EA8DF]";
@@ -58,8 +71,9 @@ export function AdvancedView() {
   };
 
   const typeClass = (type: AdvancedType) => {
-    if (type === "Analytics") return "bg-[#DFF4FF] text-[#2EA8DF]";
-    if (type === "Transaction") return "bg-[#FFE8CC] text-[#FF8A00]";
+    if (type === "Salary Advance") return "bg-[#DFF4FF] text-[#2EA8DF]";
+    if (type === "Emergency Advance") return "bg-[#FFE8CC] text-[#FF8A00]";
+    if (type === "Medical Advance") return "bg-[#E6F7ED] text-[#139B5A]";
     return "bg-[#E5E7EB] text-[#6B7280]";
   };
 
@@ -76,7 +90,7 @@ export function AdvancedView() {
 
   const closeModal = () => {
     setIsModalOpen(false);
-    setFormValues(defaultFormValues);
+    setFormValues(createDefaultFormValues());
     setErrors({});
   };
 
@@ -102,6 +116,10 @@ export function AdvancedView() {
       nextErrors.advanceName = "Please fill this field";
     if (!formValues.description)
       nextErrors.description = "Please fill this field";
+    if (!formValues.returnAmount)
+      nextErrors.returnAmount = "Please fill this field";
+    if (!formValues.approvalStatus)
+      nextErrors.approvalStatus = "Please fill this field";
     if (!formValues.attachment)
       nextErrors.attachment = "Please fill this field";
 
@@ -113,11 +131,13 @@ export function AdvancedView() {
     const seed = rows.length === 0 ? advancedDummyRows : [];
     const nextId = [...seed, ...rows].length + 1;
     const parsedType =
-      formValues.advanceType === "Analytics" ||
-      formValues.advanceType === "Transaction" ||
-      formValues.advanceType === "Log"
+      formValues.advanceType === "Salary Advance" ||
+      formValues.advanceType === "Emergency Advance" ||
+      formValues.advanceType === "Festival Advance" ||
+      formValues.advanceType === "Medical Advance" ||
+      formValues.advanceType === "Other"
         ? formValues.advanceType
-        : "Analytics";
+        : "Salary Advance";
 
     const newRow: AdvancedRow = {
       id: nextId,
@@ -134,7 +154,7 @@ export function AdvancedView() {
   };
 
   const handleClear = () => {
-    setFormValues(defaultFormValues);
+    setFormValues(createDefaultFormValues());
     setErrors({});
   };
 

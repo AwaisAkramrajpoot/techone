@@ -76,7 +76,17 @@ export function LeaveDetailsView() {
     field: K,
     value: LeaveDetailsFormValues[K]
   ) => {
-    setFormValues((prev) => ({ ...prev, [field]: value }));
+    setFormValues((prev) => {
+      if (field === "department") {
+        return {
+          ...prev,
+          department: value as string,
+          handoverTo: "",
+        };
+      }
+
+      return { ...prev, [field]: value };
+    });
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 

@@ -14,6 +14,8 @@ export type AdvancedFormValues = {
   advanceType: string;
   advanceName: string;
   description: string;
+  returnAmount: string;
+  approvalStatus: string;
   attachment: string;
   status: boolean;
 };
@@ -41,6 +43,37 @@ export function AdvancedModal({
   onClear,
 }: AdvancedModalProps) {
   const attachmentInputRef = useRef<HTMLInputElement>(null);
+  const selectFields: Array<{
+    key: "company" | "branch" | "department" | "employee";
+    label: string;
+    placeholder: string;
+    options: string[];
+  }> = [
+    {
+      key: "company",
+      label: "Company",
+      placeholder: "Select company",
+      options: ["Tech Solutions", "Global Enterprise"],
+    },
+    {
+      key: "branch",
+      label: "Branch",
+      placeholder: "Select branch",
+      options: ["Main Branch", "East Branch"],
+    },
+    {
+      key: "department",
+      label: "Department",
+      placeholder: "Select department",
+      options: ["HR", "Finance", "Operations"],
+    },
+    {
+      key: "employee",
+      label: "Employee",
+      placeholder: "Select employee",
+      options: ["Kaleem", "Aleem", "Amir"],
+    },
+  ];
   if (!isOpen) return null;
 
   return (
@@ -65,34 +98,45 @@ export function AdvancedModal({
             {errors.applyDate ? <p className="mt-1 text-xs text-red-500">{errors.applyDate}</p> : null}
           </div>
 
-          {[
-            ["company", "Company", "Select company"],
-            ["branch", "Branch", "Select branch"],
-            ["department", "Department", "Select department"],
-            ["employee", "Employee", "Select employee"],
-            ["advanceType", "Advance Type", "Select Type"],
-          ].map(([key, label, placeholder]) => (
+          {selectFields.map(({ key, label, placeholder, options }) => (
             <div key={key}>
               <label className="mb-2 block text-sm font-medium text-[#374151]">{label}</label>
               <select
-                value={values[key as keyof AdvancedFormValues] as string}
-                onChange={(e) =>
-                  onFieldChange(key as keyof AdvancedFormValues, e.target.value)
-                }
+                value={values[key]}
+                onChange={(e) => onFieldChange(key, e.target.value)}
                 className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
-                  errors[key as keyof AdvancedFormValues] ? "border-red-500" : "border-[#E5E7EB]"
+                  errors[key] ? "border-red-500" : "border-[#E5E7EB]"
                 }`}
               >
                 <option value="">{placeholder}</option>
-                <option value="Option 1">Option 1</option>
+                {options.map((option) => (
+                  <option key={option} value={option}>
+                    {option}
+                  </option>
+                ))}
               </select>
-              {errors[key as keyof AdvancedFormValues] ? (
-                <p className="mt-1 text-xs text-red-500">
-                  {errors[key as keyof AdvancedFormValues]}
-                </p>
-              ) : null}
+              {errors[key] ? <p className="mt-1 text-xs text-red-500">{errors[key]}</p> : null}
             </div>
           ))}
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">Advance Type</label>
+            <select
+              value={values.advanceType}
+              onChange={(e) => onFieldChange("advanceType", e.target.value)}
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.advanceType ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
+            >
+              <option value="">Select Type</option>
+              <option value="Salary Advance">Salary Advance</option>
+              <option value="Emergency Advance">Emergency Advance</option>
+              <option value="Festival Advance">Festival Advance</option>
+              <option value="Medical Advance">Medical Advance</option>
+              <option value="Other">Other</option>
+            </select>
+            {errors.advanceType ? <p className="mt-1 text-xs text-red-500">{errors.advanceType}</p> : null}
+          </div>
 
           <div>
             <label className="mb-2 block text-sm font-medium text-[#374151]">Advance Name</label>
@@ -117,7 +161,44 @@ export function AdvancedModal({
           </div>
 
           <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">
+              Return Amount (Current Month)
+            </label>
+            <Input
+              value={values.returnAmount}
+              onChange={(e) => onFieldChange("returnAmount", e.target.value)}
+              placeholder="Enter return amount"
+              className={`h-11 ${errors.returnAmount ? "border-red-500" : "border-[#E5E7EB]"}`}
+            />
+            {errors.returnAmount ? <p className="mt-1 text-xs text-red-500">{errors.returnAmount}</p> : null}
+          </div>
+
+          <div>
+            <label className="mb-2 block text-sm font-medium text-[#374151]">Approval Status</label>
+            <select
+              value={values.approvalStatus}
+              onChange={(e) => onFieldChange("approvalStatus", e.target.value)}
+              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+                errors.approvalStatus ? "border-red-500" : "border-[#E5E7EB]"
+              }`}
+            >
+              <option value="">Select approval status</option>
+              <option value="Pending">Pending</option>
+              <option value="Approved">Approved</option>
+              <option value="Rejected">Rejected</option>
+            </select>
+            {errors.approvalStatus ? <p className="mt-1 text-xs text-red-500">{errors.approvalStatus}</p> : null}
+          </div>
+
+          <div>
             <label className="mb-2 block text-sm font-medium text-[#374151]">Attachment</label>
+            <a
+              href="/templates/advance-request-template.txt"
+              download
+              className="mb-2 inline-block text-xs font-medium text-[#0B63CE] hover:underline"
+            >
+              Download Dummy Template
+            </a>
             <input
               ref={attachmentInputRef}
               type="file"

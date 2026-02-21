@@ -8,6 +8,7 @@ export type ExpensesFormValues = {
   company: string;
   branch: string;
   department: string;
+  employee: string;
   date: string;
   category: string;
   amount: string;
@@ -63,6 +64,12 @@ export function ExpensesModal({
       label: "Department",
       placeholder: "Select department",
       options: ["HR", "Finance"],
+    },
+    {
+      key: "employee",
+      label: "Employee",
+      placeholder: "Select employee",
+      options: ["Kaleem", "Aleem", "Amir"],
     },
   ];
 

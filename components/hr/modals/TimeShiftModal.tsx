@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { useRef } from "react";
 import { X } from "lucide-react";
 
 export type TimeShiftFormValues = {
@@ -36,6 +38,32 @@ export function TimeShiftModal({
   onSave,
   onClear,
 }: TimeShiftModalProps) {
+  const startTimeRef = useRef<HTMLInputElement>(null);
+  const endTimeRef = useRef<HTMLInputElement>(null);
+  const dayOptions = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+  const selectedDays = values.applyDay
+    ? values.applyDay.split(",").map((day) => day.trim()).filter(Boolean)
+    : [];
+
+  const toggleDay = (day: string) => {
+    const exists = selectedDays.includes(day);
+    const nextDays = exists
+      ? selectedDays.filter((selectedDay) => selectedDay !== day)
+      : [...selectedDays, day];
+
+    onFieldChange("applyDay", nextDays.join(", "));
+  };
+
+  const openTimePicker = (input: HTMLInputElement | null) => {
+    if (!input) return;
+    if ("showPicker" in input) {
+      input.showPicker();
+      return;
+    }
+    input.focus();
+    input.click();
+  };
+
   if (!isOpen) return null;
 
   return (
@@ -89,27 +117,49 @@ export function TimeShiftModal({
             </label>
             <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
               <div>
-                <Input
-                  type="time"
-                  value={values.startTime}
-                  onChange={(e) => onFieldChange("startTime", e.target.value)}
-                  className={`h-11 focus-visible:ring-[#04499E] ${
-                    errors.startTime ? "border-red-500" : "border-[#E5E7EB]"
-                  }`}
-                />
+                <div className="relative">
+                  <Input
+                    ref={startTimeRef}
+                    type="time"
+                    value={values.startTime}
+                    onChange={(e) => onFieldChange("startTime", e.target.value)}
+                    className={`time-input-single-icon h-11 pr-10 focus-visible:ring-[#04499E] ${
+                      errors.startTime ? "border-red-500" : "border-[#E5E7EB]"
+                    }`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => openTimePicker(startTimeRef.current)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                    aria-label="Open start time picker"
+                  >
+                    <Image src="/svgs/timeclock.svg" alt="" width={16} height={16} />
+                  </button>
+                </div>
                 {errors.startTime ? (
                   <p className="mt-1 text-xs text-red-500">{errors.startTime}</p>
                 ) : null}
               </div>
               <div>
-                <Input
-                  type="time"
-                  value={values.endTime}
-                  onChange={(e) => onFieldChange("endTime", e.target.value)}
-                  className={`h-11 focus-visible:ring-[#04499E] ${
-                    errors.endTime ? "border-red-500" : "border-[#E5E7EB]"
-                  }`}
-                />
+                <div className="relative">
+                  <Input
+                    ref={endTimeRef}
+                    type="time"
+                    value={values.endTime}
+                    onChange={(e) => onFieldChange("endTime", e.target.value)}
+                    className={`time-input-single-icon h-11 pr-10 focus-visible:ring-[#04499E] ${
+                      errors.endTime ? "border-red-500" : "border-[#E5E7EB]"
+                    }`}
+                  />
+                  <button
+                    type="button"
+                    onClick={() => openTimePicker(endTimeRef.current)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2"
+                    aria-label="Open end time picker"
+                  >
+                    <Image src="/svgs/timeclock.svg" alt="" width={16} height={16} />
+                  </button>
+                </div>
                 {errors.endTime ? (
                   <p className="mt-1 text-xs text-red-500">{errors.endTime}</p>
                 ) : null}
@@ -153,20 +203,25 @@ export function TimeShiftModal({
 
           <div>
             <label className="mb-2 block text-sm font-medium text-[#374151]">
-              Apply Day
+              Apply Days
             </label>
-            <select
-              value={values.applyDay}
-              onChange={(e) => onFieldChange("applyDay", e.target.value)}
-              className={`h-11 w-full rounded-md border px-3 text-sm outline-none focus:border-[#04499E] ${
+            <div
+              className={`grid grid-cols-2 gap-2 rounded-md border p-3 sm:grid-cols-3 ${
                 errors.applyDay ? "border-red-500" : "border-[#E5E7EB]"
               }`}
             >
-              <option value="">Select Days</option>
-              <option value="Monday-Friday">Monday-Friday</option>
-              <option value="Monday-Saturday">Monday-Saturday</option>
-              <option value="All Days">All Days</option>
-            </select>
+              {dayOptions.map((day) => (
+                <label key={day} className="inline-flex items-center gap-2 text-sm text-[#374151]">
+                  <input
+                    type="checkbox"
+                    checked={selectedDays.includes(day)}
+                    onChange={() => toggleDay(day)}
+                    className="h-4 w-4 rounded border-[#D0D5DD] accent-[#04499E]"
+                  />
+                  {day}
+                </label>
+              ))}
+            </div>
             {errors.applyDay ? (
               <p className="mt-1 text-xs text-red-500">{errors.applyDay}</p>
             ) : null}

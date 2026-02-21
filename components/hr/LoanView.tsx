@@ -83,7 +83,6 @@ export function LoanView() {
     if (!formValues.loanType) nextErrors.loanType = "Please fill this field";
     if (!formValues.loanAmount) nextErrors.loanAmount = "Please fill this field";
     if (!formValues.interestRate) nextErrors.interestRate = "Please fill this field";
-    if (!formValues.loanTerm) nextErrors.loanTerm = "Please fill this field";
     if (!formValues.status) nextErrors.status = "Please fill this field";
 
     if (Object.keys(nextErrors).length > 0) {
@@ -105,7 +104,7 @@ export function LoanView() {
       type: formValues.loanType,
       amount: formValues.loanAmount,
       interestRate: `${formValues.interestRate} %`,
-      term: formValues.loanTerm,
+      term: formValues.loanTerm || "N/A",
       appliedDate: formatDateLabel(formValues.applyDate),
       status: loanStatus,
     };

@@ -19,6 +19,7 @@ const defaultFormValues: ExpensesFormValues = {
   company: "",
   branch: "",
   department: "",
+  employee: "",
   date: "",
   category: "",
   amount: "",
@@ -85,6 +86,7 @@ export function ExpensesView() {
     if (!formValues.company) nextErrors.company = "Please fill this field";
     if (!formValues.branch) nextErrors.branch = "Please fill this field";
     if (!formValues.department) nextErrors.department = "Please fill this field";
+    if (!formValues.employee) nextErrors.employee = "Please fill this field";
     if (!formValues.date) nextErrors.date = "Please fill this field";
     if (!formValues.category) nextErrors.category = "Please fill this field";
     if (!formValues.amount) nextErrors.amount = "Please fill this field";

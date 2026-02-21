@@ -41,6 +41,12 @@ export function LeaveDetailsModal({
   onClear,
 }: LeaveDetailsModalProps) {
   const attachmentInputRef = useRef<HTMLInputElement>(null);
+  const departmentHeads: Record<string, string[]> = {
+    Engineering: ["Kaleem"],
+    Operations: ["Aleem"],
+    Finance: ["Amir"],
+  };
+  const headOptions = values.department ? departmentHeads[values.department] ?? [] : [];
   if (!isOpen) return null;
 
   return (
@@ -208,12 +214,17 @@ export function LeaveDetailsModal({
             <select
               value={values.handoverTo}
               onChange={(e) => onFieldChange("handoverTo", e.target.value)}
+              disabled={!values.department}
               className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none focus:border-[#04499E]"
             >
-              <option value="">Select Employee</option>
-              <option value="Kaleem">Kaleem</option>
-              <option value="Aleem">Aleem</option>
-              <option value="Amir">Amir</option>
+              <option value="">
+                {values.department ? "Select Department Head" : "Select Department First"}
+              </option>
+              {headOptions.map((head) => (
+                <option key={head} value={head}>
+                  {head} (Department Head)
+                </option>
+              ))}
             </select>
           </div>
 

@@ -122,8 +122,8 @@ export function HolidayModal({
             </label>
             <Input
               value={values.daysCount}
-              onChange={(e) => onFieldChange("daysCount", e.target.value)}
-              placeholder="Enter number of employees"
+              readOnly
+              placeholder="Auto calculated from dates"
               className={`h-11 focus-visible:ring-[#04499E] ${
                 errors.daysCount ? "border-red-500" : "border-[#E5E7EB]"
               }`}

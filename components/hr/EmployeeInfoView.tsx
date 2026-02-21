@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Plus, Search, ArrowLeft } from "lucide-react";
+import { Plus, Search, ArrowLeft, Upload, FileUp, Download } from "lucide-react";
 import { useHrLayout } from "@/components/hr/HrLayoutContext";
 import {
   employeeInfoDummyRows,
@@ -15,6 +15,8 @@ import { EmployeeRegistrationModal } from "@/components/hr/modals/EmployeeRegist
 
 export function EmployeeInfoView() {
   const hrLayout = useHrLayout();
+  const bulkUploadInputRef = useRef<HTMLInputElement>(null);
+  const importInputRef = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rows, setRows] = useState<EmployeeInfoRow[]>([]);
   const [search, setSearch] = useState("");
@@ -70,33 +72,69 @@ export function EmployeeInfoView() {
         </button>
       )}
 
-      <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+      <div className="flex flex-col gap-4">
         <div>
           <h1 className="text-2xl font-semibold text-[#0C4BA7] font-[inter]">Employee Info</h1>
-          <p className="mt-1 text-sm text-[#667085]">
+          <p className="mt-1 max-w-[560px] text-sm leading-6 text-[#667085]">
             Welcome back! Here&apos;s what&apos;s happening  at your workplace today.
           </p>
         </div>
-        <div className="flex flex-nowrap gap-1">
+        <div className="flex flex-wrap items-center gap-2">
+          <input
+            ref={bulkUploadInputRef}
+            type="file"
+            accept=".xlsx,.xls,.csv"
+            className="hidden"
+          />
+          <input
+            ref={importInputRef}
+            type="file"
+            accept=".xlsx,.xls,.csv"
+            className="hidden"
+          />
           <Button
-            className="h-8 px-2.5 text-xs shrink-0 bg-[#04499E] hover:bg-[#033E87] text-white"
+            className="h-9 px-3 text-sm bg-[#04499E] hover:bg-[#033E87] text-white"
             onClick={() => setIsModalOpen(true)}
           >
             <Plus className="mr-1.5 h-4 w-4" />
             Add Employee
           </Button>
           <Button
-            className="h-8 px-2.5 text-xs shrink-0 bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+            className="h-9 px-3 text-sm bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
             <Image src="/svgs/report.svg" alt="" width={18} height={18} />
             Report
           </Button>
           <Button
-            className="h-8 px-2.5 text-xs shrink-0 bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+            type="button"
+            className="h-9 px-3 text-sm bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+            onClick={() => bulkUploadInputRef.current?.click()}
+          >
+            <Upload className="h-3.5 w-3.5" />
+            Bulk Upload
+          </Button>
+          <Button
+            type="button"
+            className="h-9 px-3 text-sm bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+            onClick={() => importInputRef.current?.click()}
+          >
+            <FileUp className="h-3.5 w-3.5" />
+            Import
+          </Button>
+          <Button
+            className="h-9 px-3 text-sm bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
             <Image src="/svgs/export.svg" alt="" width={18} height={18} />
             Export
           </Button>
+          <a
+            href="/templates/employee-bulk-template.csv"
+            download
+            className="inline-flex h-9 items-center gap-1 rounded-md bg-[#04499E] px-3 text-sm text-white hover:bg-[#033E87]"
+          >
+            <Download className="h-3.5 w-3.5" />
+            Sample
+          </a>
         </div>
       </div>
 

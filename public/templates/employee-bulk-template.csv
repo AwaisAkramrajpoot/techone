@@ -1,0 +1,3 @@
+full_name,date_of_birth,employee_type,cnic,mobile,email,department,designation,date_of_employment,basic_salary
+Ali Khan,1995-04-12,Regular,35202-1234567-1,03001234567,ali@example.com,HR,Officer,2024-01-15,75000
+Sara Ahmed,1998-08-21,Contract,35202-7654321-2,03007654321,sara@example.com,Finance,Assistant,2024-02-01,65000

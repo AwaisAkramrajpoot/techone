@@ -47,6 +47,9 @@ type EmployeeRegistrationFormValues = {
   shift: string;
   designation: string;
   biometricId: string;
+  accountId: string;
+  employeeLoginPassword: string;
+  employeeLoginPin: string;
   dateOfEmployment: string;
   employmentType: string;
   isInactive: boolean;
@@ -98,6 +101,9 @@ const defaultValues: EmployeeRegistrationFormValues = {
   shift: "",
   designation: "",
   biometricId: "",
+  accountId: "",
+  employeeLoginPassword: "",
+  employeeLoginPin: "",
   dateOfEmployment: "",
   employmentType: "",
   isInactive: false,
@@ -704,6 +710,25 @@ export function EmployeeRegistrationModal({
                 value={values.biometricId}
                 onChange={(e) => setField("biometricId", e.target.value)}
               />
+              <Input
+                placeholder="Account ID Number"
+                value={values.accountId}
+                onChange={(e) => setField("accountId", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+              <Input
+                type="password"
+                placeholder="Employee Login Password"
+                value={values.employeeLoginPassword}
+                onChange={(e) => setField("employeeLoginPassword", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+              <Input
+                placeholder="Employee Login PIN"
+                value={values.employeeLoginPin}
+                onChange={(e) => setField("employeeLoginPin", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
               <div>
                 <label className="mb-2 block text-sm font-medium text-[#374151]">
                   Date of Employment
@@ -899,6 +924,35 @@ export function EmployeeRegistrationModal({
                 onChange={(e) => setField("customFieldValue", e.target.value)}
                 className="h-11 border-[#E5E7EB]"
               />
+
+              <h4 className="pt-2 text-sm font-semibold text-[#1F2937]">Employee Card</h4>
+              <div className="rounded-md border border-[#D1D5DB] bg-[#F8FAFC] p-3">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#04499E] text-sm font-semibold text-white">
+                    {(values.fullName || "E")
+                      .split(" ")
+                      .filter(Boolean)
+                      .slice(0, 2)
+                      .map((part) => part[0]?.toUpperCase())
+                      .join("") || "E"}
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-[#111827]">
+                      {values.fullName || "Employee Name"}
+                    </p>
+                    <p className="text-xs text-[#6B7280]">{values.designation || "Designation"}</p>
+                    <p className="text-xs text-[#6B7280]">
+                      {values.picture ? `Image: ${values.picture}` : "No image selected"}
+                    </p>
+                  </div>
+                </div>
+                <Button
+                  type="button"
+                  className="mt-3 h-9 bg-[#04499E] text-white hover:bg-[#033E87]"
+                >
+                  Create Employee Card
+                </Button>
+              </div>
             </>
           )}
         </div>

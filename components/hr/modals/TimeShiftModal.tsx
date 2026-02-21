@@ -56,8 +56,9 @@ export function TimeShiftModal({
 
   const openTimePicker = (input: HTMLInputElement | null) => {
     if (!input) return;
-    if ("showPicker" in input) {
-      input.showPicker();
+    const pickerInput = input as HTMLInputElement & { showPicker?: () => void };
+    if (pickerInput.showPicker) {
+      pickerInput.showPicker();
       return;
     }
     input.focus();

@@ -142,22 +142,22 @@ export function LoanView() {
             Manage loans, track repayments, and monitor performance
           </p>
         </div>
-        <div className="flex flex-wrap gap-2">
+        <div className="flex flex-nowrap gap-1">
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87] text-white"
+            className="h-8 px-2.5 text-xs shrink-0 bg-[#04499E] hover:bg-[#033E87] text-white"
             onClick={() => setIsModalOpen(true)}
           >
             <Plus className="mr-1.5 h-4 w-4" />
             Add Loan
           </Button>
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+            className="h-8 px-2.5 text-xs shrink-0 bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
             <Image src="/svgs/report.svg" alt="" width={18} height={18} />
             Report
           </Button>
           <Button
-            className="bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
+            className="h-8 px-2.5 text-xs shrink-0 bg-[#04499E] hover:bg-[#033E87] text-white gap-1"
           >
             <Image src="/svgs/export.svg" alt="" width={18} height={18} />
             Export
@@ -251,6 +251,10 @@ export function LoanView() {
     </section>
   );
 }
+
+
+
+
 
 
 

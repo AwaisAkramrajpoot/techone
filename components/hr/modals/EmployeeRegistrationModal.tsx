@@ -19,10 +19,13 @@ type EmployeeRegistrationModalProps = {
 
 type EmployeeRegistrationFormValues = {
   fullName: string;
+  dateOfBirth: string;
+  employeeHeight: string;
   caste: string;
   guardianRelation: string;
   fatherName: string;
   cnic: string;
+  cnicIdentityText: string;
   mobile: string;
   email: string;
   picture: string;
@@ -44,6 +47,22 @@ type EmployeeRegistrationFormValues = {
   shift: string;
   designation: string;
   biometricId: string;
+  dateOfEmployment: string;
+  employmentType: string;
+  isInactive: boolean;
+  inactiveDate: string;
+  inactiveDescription: string;
+  bankName: string;
+  bankAccountTitle: string;
+  bankAccountNumber: string;
+  bankIban: string;
+  payrollBasicSalary: string;
+  payrollPaymentMode: string;
+  payrollTaxNumber: string;
+  allowanceAmount: string;
+  deductionAmount: string;
+  customFieldName: string;
+  customFieldValue: string;
   documentType: string;
   documentAttachment: string;
   remarks: string;
@@ -51,10 +70,13 @@ type EmployeeRegistrationFormValues = {
 
 const defaultValues: EmployeeRegistrationFormValues = {
   fullName: "",
+  dateOfBirth: "",
+  employeeHeight: "",
   caste: "",
   guardianRelation: "",
   fatherName: "",
   cnic: "",
+  cnicIdentityText: "",
   mobile: "",
   email: "",
   picture: "",
@@ -76,6 +98,22 @@ const defaultValues: EmployeeRegistrationFormValues = {
   shift: "",
   designation: "",
   biometricId: "",
+  dateOfEmployment: "",
+  employmentType: "",
+  isInactive: false,
+  inactiveDate: "",
+  inactiveDescription: "",
+  bankName: "",
+  bankAccountTitle: "",
+  bankAccountNumber: "",
+  bankIban: "",
+  payrollBasicSalary: "",
+  payrollPaymentMode: "",
+  payrollTaxNumber: "",
+  allowanceAmount: "",
+  deductionAmount: "",
+  customFieldName: "",
+  customFieldValue: "",
   documentType: "",
   documentAttachment: "",
   remarks: "",
@@ -133,6 +171,7 @@ export function EmployeeRegistrationModal({
 
     if (currentStep === 1) {
       if (!values.fullName) nextErrors.fullName = "Please fill this field";
+      if (!values.dateOfBirth) nextErrors.dateOfBirth = "Please fill this field";
       if (!values.caste) nextErrors.caste = "Please fill this field";
       if (!values.guardianRelation)
         nextErrors.guardianRelation = "Please select relation";
@@ -167,6 +206,15 @@ export function EmployeeRegistrationModal({
       if (!values.department) nextErrors.department = "Please fill this field";
       if (!values.shift) nextErrors.shift = "Please fill this field";
       if (!values.designation) nextErrors.designation = "Please fill this field";
+      if (!values.dateOfEmployment)
+        nextErrors.dateOfEmployment = "Please fill this field";
+      if (!values.employmentType)
+        nextErrors.employmentType = "Please fill this field";
+      if (values.isInactive) {
+        if (!values.inactiveDate) nextErrors.inactiveDate = "Please fill this field";
+        if (!values.inactiveDescription)
+          nextErrors.inactiveDescription = "Please fill this field";
+      }
     }
 
     if (currentStep === 5) {
@@ -276,6 +324,18 @@ export function EmployeeRegistrationModal({
               </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Date of Birth
+                </label>
+                <Input
+                  type="date"
+                  value={values.dateOfBirth}
+                  onChange={(e) => setField("dateOfBirth", e.target.value)}
+                  className={`h-11 ${errors.dateOfBirth ? "border-red-500" : "border-[#E5E7EB]"}`}
+                />
+                {renderFieldError(errors.dateOfBirth)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
                   Caste
                 </label>
                 <select
@@ -335,6 +395,28 @@ export function EmployeeRegistrationModal({
                   className={`h-11 ${errors.cnic ? "border-red-500" : "border-[#E5E7EB]"}`}
                 />
                 {renderFieldError(errors.cnic)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  CNIC Identity Text
+                </label>
+                <Input
+                  value={values.cnicIdentityText}
+                  onChange={(e) => setField("cnicIdentityText", e.target.value)}
+                  placeholder="Enter identity mark/text"
+                  className="h-11 border-[#E5E7EB]"
+                />
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Employee Height
+                </label>
+                <Input
+                  value={values.employeeHeight}
+                  onChange={(e) => setField("employeeHeight", e.target.value)}
+                  placeholder="e.g. 5ft 9in"
+                  className="h-11 border-[#E5E7EB]"
+                />
               </div>
               <div>
                 <label className="mb-2 block text-sm font-medium text-[#374151]">
@@ -622,6 +704,139 @@ export function EmployeeRegistrationModal({
                 value={values.biometricId}
                 onChange={(e) => setField("biometricId", e.target.value)}
               />
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Date of Employment
+                </label>
+                <Input
+                  type="date"
+                  value={values.dateOfEmployment}
+                  onChange={(e) => setField("dateOfEmployment", e.target.value)}
+                  className={`h-11 ${errors.dateOfEmployment ? "border-red-500" : "border-[#E5E7EB]"}`}
+                />
+                {renderFieldError(errors.dateOfEmployment)}
+              </div>
+              <div>
+                <label className="mb-2 block text-sm font-medium text-[#374151]">
+                  Employee Type
+                </label>
+                <select
+                  value={values.employmentType}
+                  onChange={(e) => setField("employmentType", e.target.value)}
+                  className={`h-11 w-full rounded-md border px-3 text-sm outline-none ${
+                    errors.employmentType ? "border-red-500" : "border-[#E5E7EB]"
+                  }`}
+                >
+                  <option value="">Select type</option>
+                  <option value="Contract">Contract</option>
+                  <option value="Regular">Regular</option>
+                </select>
+                {renderFieldError(errors.employmentType)}
+              </div>
+
+              <h4 className="pt-2 text-sm font-semibold text-[#1F2937]">Employee Status</h4>
+              <label className="inline-flex items-center gap-2 text-sm text-[#374151]">
+                <input
+                  type="checkbox"
+                  checked={values.isInactive}
+                  onChange={(e) => setField("isInactive", e.target.checked)}
+                  className="h-4 w-4 accent-[#04499E]"
+                />
+                Mark Employee as Inactive
+              </label>
+
+              {values.isInactive && (
+                <>
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-[#374151]">
+                      Inactive Date
+                    </label>
+                    <Input
+                      type="date"
+                      value={values.inactiveDate}
+                      onChange={(e) => setField("inactiveDate", e.target.value)}
+                      className={`h-11 ${errors.inactiveDate ? "border-red-500" : "border-[#E5E7EB]"}`}
+                    />
+                    {renderFieldError(errors.inactiveDate)}
+                  </div>
+                  <div>
+                    <label className="mb-2 block text-sm font-medium text-[#374151]">
+                      Inactive Description
+                    </label>
+                    <Input
+                      value={values.inactiveDescription}
+                      onChange={(e) => setField("inactiveDescription", e.target.value)}
+                      placeholder="Reason/details for inactive status"
+                      className={`h-11 ${errors.inactiveDescription ? "border-red-500" : "border-[#E5E7EB]"}`}
+                    />
+                    {renderFieldError(errors.inactiveDescription)}
+                  </div>
+                </>
+              )}
+
+              <h4 className="pt-2 text-sm font-semibold text-[#1F2937]">Bank Details</h4>
+              <Input
+                placeholder="Bank Name"
+                value={values.bankName}
+                onChange={(e) => setField("bankName", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+              <Input
+                placeholder="Account Title"
+                value={values.bankAccountTitle}
+                onChange={(e) => setField("bankAccountTitle", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+              <Input
+                placeholder="Account Number"
+                value={values.bankAccountNumber}
+                onChange={(e) => setField("bankAccountNumber", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+              <Input
+                placeholder="IBAN"
+                value={values.bankIban}
+                onChange={(e) => setField("bankIban", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+
+              <h4 className="pt-2 text-sm font-semibold text-[#1F2937]">Payroll Details</h4>
+              <Input
+                placeholder="Basic Salary"
+                value={values.payrollBasicSalary}
+                onChange={(e) => setField("payrollBasicSalary", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+              <select
+                value={values.payrollPaymentMode}
+                onChange={(e) => setField("payrollPaymentMode", e.target.value)}
+                className="h-11 w-full rounded-md border border-[#E5E7EB] px-3 text-sm outline-none"
+              >
+                <option value="">Payment Mode</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+                <option value="Cash">Cash</option>
+                <option value="Cheque">Cheque</option>
+              </select>
+              <Input
+                placeholder="Tax Number (optional)"
+                value={values.payrollTaxNumber}
+                onChange={(e) => setField("payrollTaxNumber", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+
+              <h4 className="pt-2 text-sm font-semibold text-[#1F2937]">Allowance and Deduction</h4>
+              <Input
+                placeholder="Allowance Amount"
+                value={values.allowanceAmount}
+                onChange={(e) => setField("allowanceAmount", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+              <Input
+                placeholder="Deduction Amount"
+                value={values.deductionAmount}
+                onChange={(e) => setField("deductionAmount", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
             </>
           )}
 
@@ -669,6 +884,20 @@ export function EmployeeRegistrationModal({
                 placeholder="Additional Notes"
                 value={values.remarks}
                 onChange={(e) => setField("remarks", e.target.value)}
+              />
+
+              <h4 className="pt-2 text-sm font-semibold text-[#1F2937]">Extra Custom Field</h4>
+              <Input
+                placeholder="Custom Field Name (e.g. Passport No)"
+                value={values.customFieldName}
+                onChange={(e) => setField("customFieldName", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
+              />
+              <Input
+                placeholder="Custom Field Value"
+                value={values.customFieldValue}
+                onChange={(e) => setField("customFieldValue", e.target.value)}
+                className="h-11 border-[#E5E7EB]"
               />
             </>
           )}

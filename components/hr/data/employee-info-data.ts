@@ -5,6 +5,8 @@ export type EmployeeInfoRow = {
   cnic: string;
   address: string;
   phone: string;
+  designation?: string;
+  picture?: string;
 };
 
 export const employeeInfoDummyRows: EmployeeInfoRow[] = [

@@ -19,6 +19,11 @@ export function EmployeeInfoView() {
   const importInputRef = useRef<HTMLInputElement>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [rows, setRows] = useState<EmployeeInfoRow[]>([]);
+  const [employeeCardPreview, setEmployeeCardPreview] = useState<{
+    name: string;
+    designation: string;
+    picture: string;
+  } | null>(null);
   const [search, setSearch] = useState("");
 
   const filteredRows = useMemo(() => {
@@ -39,6 +44,8 @@ export function EmployeeInfoView() {
     cnic: string;
     address: string;
     phone: string;
+    designation: string;
+    picture: string;
   }) => {
     const seed = rows.length === 0 ? employeeInfoDummyRows : [];
     const nextId = [...seed, ...rows].length + 1;
@@ -49,9 +56,16 @@ export function EmployeeInfoView() {
       cnic: payload.cnic,
       address: payload.address,
       phone: payload.phone,
+      designation: payload.designation,
+      picture: payload.picture,
     };
 
     setRows([...seed, ...rows, newRow]);
+    setEmployeeCardPreview({
+      name: payload.name,
+      designation: payload.designation || "Designation",
+      picture: payload.picture,
+    });
     setIsModalOpen(false);
     hrLayout?.setShowInnerSidebar(false);
   };
@@ -148,6 +162,40 @@ export function EmployeeInfoView() {
             className="h-11 border-[#EAECF0] bg-[#F8FAFC] pl-9"
           />
         </div>
+      </div>
+
+      <div className="mt-5 rounded-md border border-[#D1D5DB] bg-white p-4">
+        <h3 className="text-base font-semibold text-[#1F2937]">Employee Card</h3>
+        <div className="mt-3 flex items-center gap-3">
+          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#04499E] text-sm font-semibold text-white">
+            {(employeeCardPreview?.name || "E")
+              .split(" ")
+              .filter(Boolean)
+              .slice(0, 2)
+              .map((part) => part[0]?.toUpperCase())
+              .join("") || "E"}
+          </div>
+          <div>
+            <p className="text-sm font-medium text-[#111827]">
+              {employeeCardPreview?.name || "Employee Name"}
+            </p>
+            <p className="text-xs text-[#6B7280]">
+              {employeeCardPreview?.designation || "Designation"}
+            </p>
+            <p className="text-xs text-[#6B7280]">
+              {employeeCardPreview?.picture
+                ? `Image: ${employeeCardPreview.picture}`
+                : "No image selected"}
+            </p>
+          </div>
+        </div>
+        <Button
+          type="button"
+          className="mt-3 h-9 bg-[#04499E] text-white hover:bg-[#033E87]"
+          disabled={!employeeCardPreview}
+        >
+          Create Employee Card
+        </Button>
       </div>
 
       {filteredRows.length === 0 ? (

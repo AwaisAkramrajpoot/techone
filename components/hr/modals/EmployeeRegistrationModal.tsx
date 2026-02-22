@@ -14,6 +14,8 @@ type EmployeeRegistrationModalProps = {
     cnic: string;
     address: string;
     phone: string;
+    designation: string;
+    picture: string;
   }) => void;
 };
 
@@ -250,6 +252,8 @@ export function EmployeeRegistrationModal({
       cnic: values.cnic,
       address: values.permStreet || values.resStreet,
       phone: values.mobile,
+      designation: values.designation,
+      picture: values.picture,
     });
   };
 
@@ -925,34 +929,6 @@ export function EmployeeRegistrationModal({
                 className="h-11 border-[#E5E7EB]"
               />
 
-              <h4 className="pt-2 text-sm font-semibold text-[#1F2937]">Employee Card</h4>
-              <div className="rounded-md border border-[#D1D5DB] bg-[#F8FAFC] p-3">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-[#04499E] text-sm font-semibold text-white">
-                    {(values.fullName || "E")
-                      .split(" ")
-                      .filter(Boolean)
-                      .slice(0, 2)
-                      .map((part) => part[0]?.toUpperCase())
-                      .join("") || "E"}
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium text-[#111827]">
-                      {values.fullName || "Employee Name"}
-                    </p>
-                    <p className="text-xs text-[#6B7280]">{values.designation || "Designation"}</p>
-                    <p className="text-xs text-[#6B7280]">
-                      {values.picture ? `Image: ${values.picture}` : "No image selected"}
-                    </p>
-                  </div>
-                </div>
-                <Button
-                  type="button"
-                  className="mt-3 h-9 bg-[#04499E] text-white hover:bg-[#033E87]"
-                >
-                  Create Employee Card
-                </Button>
-              </div>
             </>
           )}
         </div>

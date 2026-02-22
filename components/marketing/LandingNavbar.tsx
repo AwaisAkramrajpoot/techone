@@ -4,7 +4,13 @@ import Link from "next/link";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
 
-const navLinks = ["Features", "Pricing", "Guarantee", "FAQ", "Contact"];
+const navLinks = [
+  { label: "Features", href: "#features" },
+  { label: "Pricing", href: "#pricing" },
+  { label: "Guarantee", href: "#guarantee" },
+  { label: "FAQ", href: "#faq" },
+  { label: "Contact", href: "#contact" },
+];
 
 export function LandingNavbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -12,7 +18,7 @@ export function LandingNavbar() {
   return (
     <header className="fixed left-0 right-0 top-4 z-50 px-4 sm:px-6 lg:px-10">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 rounded-2xl border border-[#B9D8E5] bg-[#102A3DEB] px-4 py-3 shadow-[0_10px_30px_rgba(8,34,49,0.25)] backdrop-blur-md sm:px-6">
-        <div className="flex items-center gap-3">
+        <Link href="#top" className="flex items-center gap-3">
           <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-[#0F766E] to-[#0891B2] text-xl font-semibold text-white">
             H
           </div>
@@ -20,12 +26,12 @@ export function LandingNavbar() {
           <span className="ml-2 hidden rounded-lg bg-[#194864] px-3 py-1 text-xs font-semibold text-[#D6F3FF] md:inline">
             Built for Growing Teams
           </span>
-        </div>
+        </Link>
 
         <nav className="hidden items-center gap-8 lg:flex">
           {navLinks.map((link) => (
-            <Link key={link} href="#" className="text-sm font-medium text-[#B7C7DE] transition hover:text-white">
-              {link}
+            <Link key={link.label} href={link.href} className="text-sm font-medium text-[#B7C7DE] transition hover:text-white">
+              {link.label}
             </Link>
           ))}
         </nav>
@@ -57,12 +63,12 @@ export function LandingNavbar() {
           <nav className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <Link
-                key={link}
-                href="#"
+                key={link.label}
+                href={link.href}
                 className="rounded-lg px-2 py-1 text-sm font-medium text-[#B7C7DE] transition hover:bg-[#1E3252] hover:text-white"
                 onClick={() => setMobileOpen(false)}
               >
-                {link}
+                {link.label}
               </Link>
             ))}
           </nav>

@@ -13,7 +13,7 @@ export function MarketingLandingPage() {
   return (
     <>
       <LandingNavbar />
-      <div className="marketing-home relative min-h-screen overflow-x-hidden font-[poppins] text-[#0E2238]">
+      <div id="top" className="marketing-home relative min-h-screen overflow-x-hidden font-[poppins] text-[#0E2238]">
       <div className="animate-fade-up">
         <HeroSection />
       </div>

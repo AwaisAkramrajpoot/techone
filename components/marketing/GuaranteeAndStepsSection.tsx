@@ -8,7 +8,7 @@ const setupSteps = [
 
 export function GuaranteeAndStepsSection() {
   return (
-    <section>
+    <section id="guarantee" className="scroll-mt-28">
       <div className="bg-[#F6F8FB] px-4 py-16 text-center sm:px-6 lg:px-10">
         <div className="mx-auto max-w-4xl">
           <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#0F766E] text-white shadow-[0_0_0_8px_rgba(15,118,110,0.2)]">

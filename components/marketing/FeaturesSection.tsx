@@ -2,7 +2,7 @@ import { featureCards } from "@/components/marketing/landing-data";
 
 export function FeaturesSection() {
   return (
-    <section className="bg-transparent px-4 pb-24 pt-16 sm:px-6 lg:px-10">
+    <section id="features" className="scroll-mt-28 bg-transparent px-4 pb-24 pt-16 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <p className="mx-auto inline-flex rounded-full border border-[#BCD3E6] bg-[#E8F3FC] px-5 py-2 text-xs font-semibold tracking-[0.18em] text-[#1E5B87]">

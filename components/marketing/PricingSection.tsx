@@ -38,7 +38,7 @@ const plans = [
 
 export function PricingSection() {
   return (
-    <section className="bg-[radial-gradient(circle_at_top,#16516A_0%,#123E54_55%,#0F3345_100%)] px-4 py-20 sm:px-6 lg:px-10">
+    <section id="pricing" className="scroll-mt-28 bg-[radial-gradient(circle_at_top,#16516A_0%,#123E54_55%,#0F3345_100%)] px-4 py-20 sm:px-6 lg:px-10">
       <div className="mx-auto max-w-6xl">
         <div className="text-center">
           <p className="mx-auto inline-flex rounded-full border border-[#2D607A] bg-[#16445D] px-5 py-2 text-xs font-bold tracking-[0.16em] text-[#CDEBFA]">

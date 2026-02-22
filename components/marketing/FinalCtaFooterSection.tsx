@@ -17,7 +17,7 @@ export function FinalCtaFooterSection() {
         </button>
       </div>
 
-      <footer className="bg-[#082B33] px-4 py-14 sm:px-6 lg:px-10">
+      <footer id="contact" className="scroll-mt-28 bg-[#082B33] px-4 py-14 sm:px-6 lg:px-10">
         <div className="mx-auto grid max-w-6xl gap-10 text-[#A5B0CF] md:grid-cols-4">
           <div>
             <div className="mb-4 flex items-center gap-2">

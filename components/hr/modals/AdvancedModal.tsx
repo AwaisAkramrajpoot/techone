@@ -5,6 +5,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Upload, X } from "lucide-react";
 
+const getDecimalValue = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const parts = cleaned.split(".");
+  if (parts.length <= 1) return parts[0];
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+};
+
 export type AdvancedFormValues = {
   applyDate: string;
   company: string;
@@ -166,7 +173,7 @@ export function AdvancedModal({
             </label>
             <Input
               value={values.returnAmount}
-              onChange={(e) => onFieldChange("returnAmount", e.target.value)}
+              onChange={(e) => onFieldChange("returnAmount", getDecimalValue(e.target.value))}
               placeholder="Enter return amount"
               className={`h-11 ${errors.returnAmount ? "border-red-500" : "border-[#E5E7EB]"}`}
             />

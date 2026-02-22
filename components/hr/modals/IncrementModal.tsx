@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDecimalValue = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const parts = cleaned.split(".");
+  if (parts.length <= 1) return parts[0];
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+};
+
 export type IncrementFormValues = {
   employee: string;
   incrementType: string;
@@ -91,7 +98,7 @@ export function IncrementModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Current Salary</label>
             <Input
               value={values.currentSalary}
-              onChange={(e) => onFieldChange("currentSalary", e.target.value)}
+              onChange={(e) => onFieldChange("currentSalary", getDecimalValue(e.target.value))}
               placeholder="Enter current salary"
               className={`h-11 ${errors.currentSalary ? "border-red-500" : "border-[#E5E7EB]"}`}
             />
@@ -104,7 +111,7 @@ export function IncrementModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Increment Percentage</label>
             <Input
               value={values.incrementPercentage}
-              onChange={(e) => onFieldChange("incrementPercentage", e.target.value)}
+              onChange={(e) => onFieldChange("incrementPercentage", getDecimalValue(e.target.value))}
               placeholder="Enter increment percentage"
               className={`h-11 ${errors.incrementPercentage ? "border-red-500" : "border-[#E5E7EB]"}`}
             />

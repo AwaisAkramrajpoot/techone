@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDecimalValue = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const parts = cleaned.split(".");
+  if (parts.length <= 1) return parts[0];
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+};
+
 export type PayrollFormValues = {
   fullName: string;
   email: string;
@@ -106,7 +113,7 @@ export function PayrollModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Monthly Salary ($)</label>
             <Input
               value={values.monthlySalary}
-              onChange={(e) => onFieldChange("monthlySalary", e.target.value)}
+              onChange={(e) => onFieldChange("monthlySalary", getDecimalValue(e.target.value))}
               placeholder="Enter monthly salary"
               className={`h-11 ${errors.monthlySalary ? "border-red-500" : "border-[#E5E7EB]"}`}
             />

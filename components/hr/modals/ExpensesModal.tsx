@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDecimalValue = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const parts = cleaned.split(".");
+  if (parts.length <= 1) return parts[0];
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+};
+
 export type ExpensesFormValues = {
   company: string;
   branch: string;
@@ -137,7 +144,7 @@ export function ExpensesModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Amount</label>
             <Input
               value={values.amount}
-              onChange={(e) => onFieldChange("amount", e.target.value)}
+              onChange={(e) => onFieldChange("amount", getDecimalValue(e.target.value))}
               placeholder="Enter amount"
               className={`h-11 ${errors.amount ? "border-red-500" : "border-[#E5E7EB]"}`}
             />

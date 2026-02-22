@@ -6,6 +6,8 @@ import { Input } from "@/components/ui/input";
 import { useRef } from "react";
 import { X } from "lucide-react";
 
+const getDigitsValue = (value: string) => value.replace(/\D/g, "");
+
 export type TimeShiftFormValues = {
   shiftName: string;
   shiftCode: string;
@@ -174,7 +176,7 @@ export function TimeShiftModal({
             </label>
             <Input
               value={values.lateArrival}
-              onChange={(e) => onFieldChange("lateArrival", e.target.value)}
+              onChange={(e) => onFieldChange("lateArrival", getDigitsValue(e.target.value))}
               placeholder="e.g. 60 minutes"
               className={`h-11 focus-visible:ring-[#04499E] ${
                 errors.lateArrival ? "border-red-500" : "border-[#E5E7EB]"
@@ -191,7 +193,7 @@ export function TimeShiftModal({
             </label>
             <Input
               value={values.breakDuration}
-              onChange={(e) => onFieldChange("breakDuration", e.target.value)}
+              onChange={(e) => onFieldChange("breakDuration", getDigitsValue(e.target.value))}
               placeholder="e.g. 60"
               className={`h-11 focus-visible:ring-[#04499E] ${
                 errors.breakDuration ? "border-red-500" : "border-[#E5E7EB]"

@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDecimalValue = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const parts = cleaned.split(".");
+  if (parts.length <= 1) return parts[0];
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+};
+
 export type LoanFormValues = {
   applyDate: string;
   company: string;
@@ -146,7 +153,7 @@ export function LoanModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Loan Amount</label>
             <Input
               value={values.loanAmount}
-              onChange={(e) => onFieldChange("loanAmount", e.target.value)}
+              onChange={(e) => onFieldChange("loanAmount", getDecimalValue(e.target.value))}
               placeholder="Enter loan amount"
               className={`h-11 ${errors.loanAmount ? "border-red-500" : "border-[#E5E7EB]"}`}
             />
@@ -157,7 +164,7 @@ export function LoanModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Interest Rate (%)</label>
             <Input
               value={values.interestRate}
-              onChange={(e) => onFieldChange("interestRate", e.target.value)}
+              onChange={(e) => onFieldChange("interestRate", getDecimalValue(e.target.value))}
               placeholder="Enter interest rate"
               className={`h-11 ${errors.interestRate ? "border-red-500" : "border-[#E5E7EB]"}`}
             />

@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDecimalValue = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const parts = cleaned.split(".");
+  if (parts.length <= 1) return parts[0];
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+};
+
 export type OvertimeFormValues = {
   employee: string;
   startDate: string;
@@ -123,7 +130,7 @@ export function OvertimeModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Hourly Rate</label>
             <Input
               value={values.hourlyRate}
-              onChange={(e) => onFieldChange("hourlyRate", e.target.value)}
+              onChange={(e) => onFieldChange("hourlyRate", getDecimalValue(e.target.value))}
               placeholder="Enter hourly rate"
               className={`h-11 ${errors.hourlyRate ? "border-red-500" : "border-[#E5E7EB]"}`}
             />

@@ -5,6 +5,8 @@ import { Input } from "@/components/ui/input";
 import { useRef } from "react";
 import { Upload, X } from "lucide-react";
 
+const getDigitsValue = (value: string) => value.replace(/\D/g, "");
+
 export type LeaveDetailsFormValues = {
   department: string;
   employee: string;
@@ -162,7 +164,7 @@ export function LeaveDetailsModal({
             </label>
             <Input
               value={values.days}
-              onChange={(e) => onFieldChange("days", e.target.value)}
+              onChange={(e) => onFieldChange("days", getDigitsValue(e.target.value))}
               placeholder="Enter Days"
               className={`h-11 focus-visible:ring-[#04499E] ${
                 errors.days ? "border-red-500" : "border-[#E5E7EB]"
@@ -196,8 +198,8 @@ export function LeaveDetailsModal({
             </label>
             <Input
               value={values.contact}
-              onChange={(e) => onFieldChange("contact", e.target.value)}
-              placeholder="Phone Number Or Email"
+              onChange={(e) => onFieldChange("contact", getDigitsValue(e.target.value))}
+              placeholder="Phone Number"
               className={`h-11 focus-visible:ring-[#04499E] ${
                 errors.contact ? "border-red-500" : "border-[#E5E7EB]"
               }`}

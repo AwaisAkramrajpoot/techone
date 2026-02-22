@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDigitsValue = (value: string) => value.replace(/\D/g, "");
+
 export type LeaveTypeFormValues = {
   company: string;
   branch: string;
@@ -146,7 +148,7 @@ export function LeaveTypeModal({
             </label>
             <Input
               value={values.maxDays}
-              onChange={(e) => onFieldChange("maxDays", e.target.value)}
+              onChange={(e) => onFieldChange("maxDays", getDigitsValue(e.target.value))}
               placeholder="Enter maximum days allowed"
               className={`h-11 focus-visible:ring-[#04499E] ${
                 errors.maxDays ? "border-red-500" : "border-[#E5E7EB]"

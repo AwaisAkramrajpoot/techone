@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDecimalValue = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const parts = cleaned.split(".");
+  if (parts.length <= 1) return parts[0];
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+};
+
 export type BonusFormValues = {
   employee: string;
   bonusType: string;
@@ -89,7 +96,7 @@ export function BonusModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Bonus Amount</label>
             <Input
               value={values.bonusAmount}
-              onChange={(e) => onFieldChange("bonusAmount", e.target.value)}
+              onChange={(e) => onFieldChange("bonusAmount", getDecimalValue(e.target.value))}
               placeholder="Enter bonus amount"
               className={`h-11 ${errors.bonusAmount ? "border-red-500" : "border-[#E5E7EB]"}`}
             />
@@ -100,7 +107,7 @@ export function BonusModal({
             <label className="mb-2 block text-sm font-medium text-[#374151]">Percentage of Salary (%)</label>
             <Input
               value={values.percentage}
-              onChange={(e) => onFieldChange("percentage", e.target.value)}
+              onChange={(e) => onFieldChange("percentage", getDecimalValue(e.target.value))}
               placeholder="Enter percentage"
               className={`h-11 ${errors.percentage ? "border-red-500" : "border-[#E5E7EB]"}`}
             />

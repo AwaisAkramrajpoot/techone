@@ -243,6 +243,68 @@ export default function SettingsPage() {
               Update Password
             </Button>
           </section>
+
+          <section className="mt-6 rounded-xl border border-[#DADDE3] bg-white p-6">
+            <h2 className="font-[inter] text-2xl font-semibold text-black">Device Details</h2>
+            <p className="mt-1 text-sm text-[#6B7280]">
+              Attendance device integration preview (read-only)
+            </p>
+
+            <div className="mt-6 grid gap-5 md:grid-cols-2">
+              <div>
+                <Label className="text-sm text-black">Device Name</Label>
+                <Input
+                  disabled
+                  defaultValue="ZKTeco K40"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-[#F8FAFC] text-sm text-[#6B7280]"
+                />
+              </div>
+              <div>
+                <Label className="text-sm text-black">Device Type</Label>
+                <Input
+                  disabled
+                  defaultValue="Biometric Attendance Device"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-[#F8FAFC] text-sm text-[#6B7280]"
+                />
+              </div>
+              <div>
+                <Label className="text-sm text-black">Connected Via</Label>
+                <Input
+                  disabled
+                  defaultValue="Ethernet"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-[#F8FAFC] text-sm text-[#6B7280]"
+                />
+              </div>
+              <div>
+                <Label className="text-sm text-black">IP Address</Label>
+                <Input
+                  disabled
+                  defaultValue="192.168.1.120"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-[#F8FAFC] text-sm text-[#6B7280]"
+                />
+              </div>
+              <div>
+                <Label className="text-sm text-black">Port / COM</Label>
+                <Input
+                  disabled
+                  defaultValue="COM3 / Port 4370"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-[#F8FAFC] text-sm text-[#6B7280]"
+                />
+              </div>
+              <div>
+                <Label className="text-sm text-black">Connection Status</Label>
+                <Input
+                  disabled
+                  defaultValue="Connected"
+                  className="mt-2 h-11 border-[#D1D5DB] bg-[#F8FAFC] text-sm text-[#6B7280]"
+                />
+              </div>
+            </div>
+
+            <p className="mt-6 text-sm text-[#6B7280]">
+              Device settings are locked for now and will be configurable in a future update.
+            </p>
+          </section>
         </main>
       </div>
     </div>

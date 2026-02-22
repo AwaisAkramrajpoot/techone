@@ -4,6 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDecimalValue = (value: string) => {
+  const cleaned = value.replace(/[^0-9.]/g, "");
+  const parts = cleaned.split(".");
+  if (parts.length <= 1) return parts[0];
+  return `${parts[0]}.${parts.slice(1).join("")}`;
+};
+
 export type AllowanceDeductionFormValues = {
   type: "Allowance" | "Deduction" | "";
   name: string;
@@ -90,7 +97,7 @@ export function AllowanceDeductionModal({
             </label>
             <Input
               value={values.amount}
-              onChange={(e) => onFieldChange("amount", e.target.value)}
+              onChange={(e) => onFieldChange("amount", getDecimalValue(e.target.value))}
               placeholder="e.g., 500 or 5%"
               className={`h-11 focus-visible:ring-[#04499E] ${
                 errors.amount ? "border-red-500" : "border-[#E5E7EB]"

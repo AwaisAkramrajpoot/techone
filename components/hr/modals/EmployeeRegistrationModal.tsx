@@ -153,6 +153,23 @@ export function EmployeeRegistrationModal({
     Partial<Record<keyof EmployeeRegistrationFormValues, string>>
   >({});
 
+  const digitsOnlyFields: Array<keyof EmployeeRegistrationFormValues> = [
+    "cnic",
+    "mobile",
+    "biometricId",
+    "accountId",
+    "employeeLoginPin",
+    "bankAccountNumber",
+    "permPostal",
+    "resPostal",
+  ];
+
+  const decimalFields: Array<keyof EmployeeRegistrationFormValues> = [
+    "payrollBasicSalary",
+    "allowanceAmount",
+    "deductionAmount",
+  ];
+
   useEffect(() => {
     if (isOpen) {
       setCurrentStep(1);
@@ -169,7 +186,18 @@ export function EmployeeRegistrationModal({
     field: K,
     value: EmployeeRegistrationFormValues[K]
   ) => {
-    setValues((prev) => ({ ...prev, [field]: value }));
+    let nextValue = value;
+    if (typeof value === "string" && digitsOnlyFields.includes(field)) {
+      nextValue = value.replace(/\D/g, "") as EmployeeRegistrationFormValues[K];
+    } else if (typeof value === "string" && decimalFields.includes(field)) {
+      const cleaned = value.replace(/[^0-9.]/g, "");
+      const parts = cleaned.split(".");
+      nextValue = (parts.length <= 1
+        ? parts[0]
+        : `${parts[0]}.${parts.slice(1).join("")}`) as EmployeeRegistrationFormValues[K];
+    }
+
+    setValues((prev) => ({ ...prev, [field]: nextValue }));
     setErrors((prev) => ({ ...prev, [field]: "" }));
   };
 

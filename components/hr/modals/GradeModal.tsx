@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { X } from "lucide-react";
 
+const getDigitsValue = (value: string) => value.replace(/\D/g, "");
+
 export type GradeFormValues = {
   company: string;
   branch: string;
@@ -154,7 +156,7 @@ export function GradeModal({
             </label>
             <Input
               value={values.employees}
-              onChange={(e) => onFieldChange("employees", e.target.value)}
+              onChange={(e) => onFieldChange("employees", getDigitsValue(e.target.value))}
               placeholder="Enter number of employees"
               className={`h-11 focus-visible:ring-[#04499E] ${
                 errors.employees ? "border-red-500" : "border-[#E5E7EB]"

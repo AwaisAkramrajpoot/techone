@@ -26,6 +26,8 @@ const defaultFormValues: PayrollFormValues = {
   notes: "",
 };
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function PayrollView() {
   const hrLayout = useHrLayout();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,6 +70,9 @@ export function PayrollView() {
     const nextErrors: Partial<Record<keyof PayrollFormValues, string>> = {};
     if (!formValues.fullName) nextErrors.fullName = "Please fill this field";
     if (!formValues.email) nextErrors.email = "Please fill this field";
+    else if (!emailRegex.test(formValues.email.trim())) {
+      nextErrors.email = "Please enter a valid email address";
+    }
     if (!formValues.department) nextErrors.department = "Please fill this field";
     if (!formValues.position) nextErrors.position = "Please fill this field";
     if (!formValues.monthlySalary) nextErrors.monthlySalary = "Please fill this field";

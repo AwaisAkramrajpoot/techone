@@ -135,6 +135,8 @@ const steps = [
   { index: 5, label: "Documents", title: "Documents Upload" },
 ] as const;
 
+const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
 export function EmployeeRegistrationModal({
   isOpen,
   onClose,
@@ -215,6 +217,9 @@ export function EmployeeRegistrationModal({
       if (!values.cnic) nextErrors.cnic = "Please fill this field";
       if (!values.mobile) nextErrors.mobile = "Please fill this field";
       if (!values.email) nextErrors.email = "Please fill this field";
+      else if (!emailRegex.test(values.email.trim())) {
+        nextErrors.email = "Please enter a valid email address";
+      }
     }
 
     if (currentStep === 2) {
@@ -472,6 +477,7 @@ export function EmployeeRegistrationModal({
                   Email Address
                 </label>
                 <Input
+                  type="email"
                   value={values.email}
                   onChange={(e) => setField("email", e.target.value)}
                   className={`h-11 ${errors.email ? "border-red-500" : "border-[#E5E7EB]"}`}

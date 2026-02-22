@@ -12,9 +12,17 @@ export default function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [rememberMe, setRememberMe] = useState(false);
+  const [emailError, setEmailError] = useState("");
+
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
   const handleSignUp = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!emailRegex.test(email.trim())) {
+      setEmailError("Please enter a valid email address");
+      return;
+    }
+    setEmailError("");
     router.push('/dashboard');
   };
 
@@ -115,11 +123,15 @@ export default function LoginPage() {
                 type="email"
                 placeholder="Email"
                 value={email}
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={(e) => {
+                  setEmail(e.target.value);
+                  setEmailError("");
+                }}
                 className="w-full border border-gray-300 rounded-md pl-10 pr-4 py-2.5 text-sm placeholder:text-[#757575] focus:outline-none focus:ring-2 focus:ring-[#04499E] focus:border-transparent transition"
                 required
               />
             </div>
+            {emailError ? <p className="-mt-2 text-xs text-red-500">{emailError}</p> : null}
 
             {/* Password Input */}
             <div className="relative">

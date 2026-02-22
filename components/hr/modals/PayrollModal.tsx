@@ -72,6 +72,7 @@ export function PayrollModal({
           <div>
             <label className="mb-2 block text-sm font-medium text-[#374151]">Email Address</label>
             <Input
+              type="email"
               value={values.email}
               onChange={(e) => onFieldChange("email", e.target.value)}
               placeholder="Enter email address"

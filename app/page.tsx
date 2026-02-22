@@ -1,12 +1,5 @@
-import React from 'react'
-import SignupPage from '@/components/Auth/SignupPage/SignupPage'
- 
- 
- export default function page() {
-   return (
-     <div>
-    <SignupPage/>
-     </div>
-   )
- }
- 
+import { MarketingLandingPage } from "@/components/marketing/MarketingLandingPage";
+
+export default function HomePage() {
+  return <MarketingLandingPage />;
+}
